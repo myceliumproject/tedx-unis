@@ -1,3 +1,4 @@
+import Stage from "$/lib/components/Stage";
 import useSocket from "$/lib/hooks/socket";
 import { useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <Container className="text-center">
       <h1>Hello</h1>
+      <Stage />
       <Button>Hello</Button>
     </Container>
   );
