@@ -1,7 +1,7 @@
+import { urlApi } from "$/environment";
 import { useLayoutEffect } from "react";
 import useEvent from "react-use-event-hook";
 import io from "socket.io-client";
-import { urlApi } from "./environment";
 
 const socket = io(urlApi);
 
