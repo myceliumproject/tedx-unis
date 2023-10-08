@@ -1,10 +1,9 @@
 import { cert, initializeApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-
-import serviceAccount from "../service-account.json";
+import { readFileSync } from "fs";
 
 initializeApp({
-  credential: cert(serviceAccount),
+  credential: cert(JSON.parse(readFileSync("./service-account.json"))),
 });
 
 export const db = getFirestore();
