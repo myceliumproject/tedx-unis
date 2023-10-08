@@ -42,7 +42,7 @@ app.get("/test", async (req, res) => {
 })
 
 /** EMPTY EVENT BLOCKS **/
-app.post('/event_block', async (req, res) => {
+app.post('/eventblock', async (req, res) => {
   try {
     const eventBlock = {
       datetime: '', 
@@ -81,7 +81,7 @@ app.post('/event_block', async (req, res) => {
 })
 
 /** GET ALL EVENT BLOCKS **/
-app.get('/event_blocks', async (req, res) => {
+app.get('/eventblock/list', async (req, res) => {
   try {
     const eventBlocksSnapshot = await db.collection('event_blocks').get();
     const eventBlocks = [];
@@ -91,11 +91,27 @@ app.get('/event_blocks', async (req, res) => {
       eventBlocks.push({ id: doc.id, ...eventBlockData });
     });
 
-    res.status(200).json(eventBlocks);
+    res.status(200).json({code: 0, data: eventBlocks});
   } catch (error) {
     res.status(500).json({ error: 'Error 500' });
   }
 });
+
+/** SPECIFIC EVENT BLOCK **/
+app.get('/eventblock/get/:eventBlockId', async (req, res) => {
+  try {
+    const { eventBlockId } = req.params;
+
+    const eventBlockRef = db.collection('event_blocks').doc(eventBlockId);
+    const eventBlockSnapshot = await eventBlockRef.get();
+    const eventBlockData = eventBlockSnapshot.data();
+
+    res.status(200).json({code: 0, data: eventBlockData});
+  } catch (error) {
+    res.status(500).json({ error: 'Error 500' });
+  }
+});
+
 
 /** RESERVE 
 {
@@ -105,12 +121,12 @@ app.get('/event_blocks', async (req, res) => {
 }
  * **/
 
-app.patch('/reserve/:id_event_block', async (req, res) => {
+app.patch('/eventblock/reserve/:id_eventblock', async (req, res) => {
   try {
-    const { id_event_block } = req.params;
+    const { id_eventblock } = req.params;
     const { userId, name, seat } = req.body;
 
-    const eventBlockRef = db.collection('event_blocks').doc(id_event_block);
+    const eventBlockRef = db.collection('event_blocks').doc(id_eventblock);
     const eventBlockSnapshot = await eventBlockRef.get();
 
     const eventBlockData = eventBlockSnapshot.data();
@@ -121,7 +137,7 @@ app.patch('/reserve/:id_event_block', async (req, res) => {
       (assignment) => assignment.userId === userId
     );
     if (existingAssignment) {
-      return res.status(400).json({ error: 'User already has a seat assignment' });
+      return res.status(400).json({ error: 'User already has a seat assigned' });
     }
 
     const newAssignment = { userId, name, seat };
@@ -139,7 +155,6 @@ app.patch('/reserve/:id_event_block', async (req, res) => {
       takenSeatAssignments,
       takenSeats,
     });
-
     res.status(200).json({ message: 'Success' });
   } catch (error) {
     res.status(500).json({ error: 'Error 500' });

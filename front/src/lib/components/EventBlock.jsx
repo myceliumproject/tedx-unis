@@ -7,7 +7,7 @@ export default function EventBlock({ page = null, seat = null, data }) {
   return (
     <Card border={seat !== null ? "primary" : undefined}>
       <Card.Img
-        src={data.img}
+        src={data?.img}
         className="object-fit-cover"
         style={{ height: "16rem" }}
       />
@@ -22,8 +22,8 @@ export default function EventBlock({ page = null, seat = null, data }) {
       ) : null}
       <Card.Body>
         <Card.Subtitle>
-          {new Date(data.datetime).toLocaleDateString()} -{" "}
-          {new Date(data.datetime).toLocaleTimeString()}
+          {new Date(data?.datetime).toLocaleDateString()} -{" "}
+          {new Date(data?.datetime).toLocaleTimeString()}
         </Card.Subtitle>
       </Card.Body>
       <Accordion
@@ -31,7 +31,7 @@ export default function EventBlock({ page = null, seat = null, data }) {
         flush
         className="border-top border-bottom border-tertiary"
       >
-        {data.events.map((ev, i) => (
+        {data?.events.map((ev, i) => (
           <Accordion.Item eventKey={i.toString()} key={i}>
             <Accordion.Header>
               {ev.name} - {ev.speaker}
@@ -52,11 +52,11 @@ export default function EventBlock({ page = null, seat = null, data }) {
       {page !== null ? (
         <Card.Body>
           {page === "home" ? (
-            <Link to={`/block/${data.id}`} className="btn btn-primary">
+            <Link to={`/block/${data?.id}`} className="btn btn-primary">
               {seat !== null ? "Ver ticket" : "Conseguir asiento"}
             </Link>
           ) : page === "staff" ? (
-            <Link to={`/block/${data.id}/assigned`} className="btn btn-primary">
+            <Link to={`/block/${data?.id}/assigned`} className="btn btn-primary">
               Lista de asignados
             </Link>
           ) : null}

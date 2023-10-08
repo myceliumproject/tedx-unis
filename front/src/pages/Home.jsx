@@ -3,17 +3,20 @@ import { useUser } from "$/lib/hooks/user";
 import * as staticData from "$/lib/staticData";
 import { useLayoutEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
+import axios from "axios";
+import { urlApi } from "$/environment";
 
 export default function Home() {
   const [eventBlocks, setEventBlocks] = useState([]);
   const [user] = useUser();
 
   useLayoutEffect(() => {
-    // axios.get(urlApi + `/eventblock/list`).then((res) => {
-    //   if (res.data.code === 0) {
-    //     setEventBlocks(res.data.data);
-    //   }
-    // });
+    axios.get(urlApi + `/eventblock/list`).then((res) => {
+      if (res.data.code === 0) {
+        //console.log(res.data)
+        setEventBlocks(res.data.data)
+      }
+    });
     setEventBlocks(staticData.eventBlocks);
   }, []);
 

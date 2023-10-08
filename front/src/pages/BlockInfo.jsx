@@ -8,6 +8,8 @@ import { Button, Card, Modal, Stack } from "react-bootstrap";
 import QRCode from "react-qr-code";
 import { useParams } from "react-router-dom";
 import useEvent from "react-use-event-hook";
+import axios from "axios";
+import { urlApi } from "$/environment";
 
 export default function BlockInfo() {
   const { id: eventBlockId } = useParams();
@@ -19,26 +21,31 @@ export default function BlockInfo() {
     : null;
 
   useLayoutEffect(() => {
-    // axios.get(urlApi + `/eventblock/get/${eventBlockId}`).then((res) => {
-    //   if (res.data.code === 0) {
-    //     setEventBlock(res.data.data);
-    //   }
-    // });
-    setEventBlock(staticData.eventBlocks.find((eb) => eb.id === eventBlockId));
+    axios.get(urlApi + `/eventblock/get/${eventBlockId}`).then((res) => {
+      if (res.data.code === 0) {
+        //console.log(res.data)
+        setEventBlock(res.data.data)
+      }
+    });
+    //setEventBlock(staticData.find((eb) => eb.id === eventBlockId));
   }, [eventBlockId]);
 
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [seatConfirmationDialog, setSeatConfirmationDialog] = useState(false);
   const confirmSeat = useEvent(() => {
-    // axios
-    //   .post(urlApi + `/eventblock/reserve/${eventBlockId}`, {
-    //     seat: selectedSeat,
-    //   })
-    //   .then((res) => {
-    //     if (res.data.code === 0) {
-    //       setEventBlock(res.data.data);
-    //     }
-    //   });
+
+    let post = {
+      seat: selectedSeat,
+      userId: 'TEST2',//user.id, 
+      name: 'TEST2',//user.name
+    }
+    axios
+      .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post)
+      .then((res) => {
+        if (res.data.code === 0) {
+          setEventBlock(res.data.data);
+        }
+      });
     setSeatConfirmationDialog(false);
   });
 
