@@ -1,6 +1,5 @@
 // @ts-check
 import SeatImg from "$/assets/seat.svg?react";
-import { useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 /** @type {[string[], string[], string[]][]} */
@@ -62,11 +61,9 @@ function Seat({ seat, onSelect, selected = false, disabled = false }) {
   );
 }
 
-export default function Stage() {
-  const [selected, setSelected] = useState(null);
-
+export default function Stage({ selected, onSelect }) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto pt-4">
       <div
         style={{
           minWidth: "calc(2rem * 17 + 2rem * 4 * 4)",
@@ -74,29 +71,43 @@ export default function Stage() {
         }}
       >
         {seatArrangement.map((r, i) => (
-          <div key={i} style={{ height: "2rem" }} className="mb-1">
+          <div
+            key={i}
+            style={{
+              height: "2rem",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            className="mb-1"
+          >
             <div
               style={{
                 transformOrigin: "right",
                 transform: "translate(calc(2rem * -2)) rotate(-30deg)",
-                display: "inline-block",
+                display: "inline-flex",
               }}
             >
               {r[0].map((c) => (
                 <Seat
+                  key={c}
                   seat={c}
                   selected={c === selected}
-                  onSelect={setSelected}
+                  onSelect={onSelect}
                 />
               ))}
             </div>
-            <div style={{ display: "inline-flex" }}>
+            <div
+              style={{
+                display: "inline-flex",
+              }}
+            >
               {i === 1 ? <Spacer seats={4} /> : null}
               {r[1].map((c) => (
                 <Seat
+                  key={c}
                   seat={c}
                   selected={c === selected}
-                  onSelect={setSelected}
+                  onSelect={onSelect}
                 />
               ))}
               {i === 1 ? <Spacer seats={4} /> : null}
@@ -105,14 +116,15 @@ export default function Stage() {
               style={{
                 transformOrigin: "left",
                 transform: "translate(calc(2rem * 2)) rotate(30deg)",
-                display: "inline-block",
+                display: "inline-flex",
               }}
             >
               {r[2].map((c) => (
                 <Seat
+                  key={c}
                   seat={c}
                   selected={c === selected}
-                  onSelect={setSelected}
+                  onSelect={onSelect}
                 />
               ))}
             </div>
