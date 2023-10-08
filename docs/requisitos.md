@@ -43,7 +43,7 @@
 - [x] Detalle de bloque
 - [x] Autenticación
 - [x] Selección de asiento por bloque
-- [ ] Ticket por bloque
+- [x] Ticket por bloque
 
 ## Staff
 

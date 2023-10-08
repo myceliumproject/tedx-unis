@@ -29,11 +29,17 @@ function Spacer({ seats }) {
   );
 }
 
-function Seat({ seat, onSelect, selected = false, disabled = false }) {
+function Seat({
+  seat,
+  onSelect,
+  selected = false,
+  disabled = false,
+  readOnly = false,
+}) {
   return (
     <OverlayTrigger overlay={<Tooltip>{seat}</Tooltip>}>
       <div
-        role={!disabled ? "button" : undefined}
+        role={!disabled && !readOnly ? "button" : undefined}
         aria-disabled={disabled}
         style={{
           width: "2rem",
@@ -41,14 +47,16 @@ function Seat({ seat, onSelect, selected = false, disabled = false }) {
           padding: 0,
           display: "inline-block",
         }}
-        onClick={!disabled ? () => onSelect(seat) : undefined}
+        onClick={
+          !disabled && !readOnly && onSelect ? () => onSelect(seat) : undefined
+        }
         onKeyDown={
-          !disabled
+          !disabled && !readOnly && onSelect
             ? (e) =>
                 e.key === "Enter" || e.key === " " ? onSelect(seat) : undefined
             : undefined
         }
-        tabIndex={!disabled ? 1 : -1}
+        tabIndex={!disabled && !readOnly ? 1 : -1}
       >
         <SeatImg
           width="100%"
@@ -61,7 +69,11 @@ function Seat({ seat, onSelect, selected = false, disabled = false }) {
   );
 }
 
-export default function Stage({ selected, onSelect }) {
+export default function Stage({
+  selected,
+  onSelect = undefined,
+  readOnly = false,
+}) {
   return (
     <div className="overflow-x-auto pt-4">
       <div
@@ -93,6 +105,7 @@ export default function Stage({ selected, onSelect }) {
                   seat={c}
                   selected={c === selected}
                   onSelect={onSelect}
+                  readOnly={readOnly}
                 />
               ))}
             </div>
@@ -108,6 +121,7 @@ export default function Stage({ selected, onSelect }) {
                   seat={c}
                   selected={c === selected}
                   onSelect={onSelect}
+                  readOnly={readOnly}
                 />
               ))}
               {i === 1 ? <Spacer seats={4} /> : null}
@@ -125,6 +139,7 @@ export default function Stage({ selected, onSelect }) {
                   seat={c}
                   selected={c === selected}
                   onSelect={onSelect}
+                  readOnly={readOnly}
                 />
               ))}
             </div>
