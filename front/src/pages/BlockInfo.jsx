@@ -52,35 +52,48 @@ export default function BlockInfo() {
   return (
     <>
       <Stack gap={4}>
-        {eventBlock !== null ? <EventBlock data={eventBlock} /> : null}
-        <Card>
-          {userTicket !== null ? (
-            <>
-              <Card.Header>Ticket</Card.Header>
-              <Card.Body className="text-center">
-                <div>
-                  <QRCode value={userTicket.token} />
-                </div>
-                <Card.Text className="mt-2">
-                  Has reservado el asiento {userTicket.seat}
-                </Card.Text>
-                <Stage readOnly selected={userTicket.seat} />
-              </Card.Body>
-            </>
-          ) : (
-            <>
-              <Stage selected={selectedSeat} onSelect={setSelectedSeat} />
-              <Card.Body>
-                <Button
-                  onClick={() => setSeatConfirmationDialog(true)}
-                  disabled={selectedSeat === null}
-                >
-                  Confirmar
-                </Button>
-              </Card.Body>
-            </>
-          )}
-        </Card>
+        {eventBlock !== null ? (
+          <>
+            <EventBlock data={eventBlock} />
+            <Card>
+              {userTicket !== null ? (
+                <>
+                  <Card.Header>Ticket</Card.Header>
+                  <Card.Body className="text-center">
+                    <div>
+                      <QRCode value={userTicket.token} />
+                    </div>
+                    <Card.Text className="mt-2">
+                      Has reservado el asiento {userTicket.seat}
+                    </Card.Text>
+                    <Stage
+                      readOnly
+                      selected={userTicket.seat}
+                      taken={eventBlock.takenSeats}
+                    />
+                  </Card.Body>
+                </>
+              ) : (
+                <>
+                  <Stage
+                    progressiveUnblock
+                    selected={selectedSeat}
+                    onSelect={setSelectedSeat}
+                    taken={eventBlock.takenSeats}
+                  />
+                  <Card.Body>
+                    <Button
+                      onClick={() => setSeatConfirmationDialog(true)}
+                      disabled={selectedSeat === null}
+                    >
+                      Confirmar
+                    </Button>
+                  </Card.Body>
+                </>
+              )}
+            </Card>
+          </>
+        ) : null}
       </Stack>
       <Modal
         show={seatConfirmationDialog}

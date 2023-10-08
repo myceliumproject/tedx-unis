@@ -26,6 +26,7 @@ export const eventBlocks = [
           "https://unis.edu.gt/wp-content/uploads/2020/06/oscar-Rojas-2.jpg",
       },
     ],
+    takenSeats: ["A5", "A6", "A7", "A8", "B8", "B9", "B10", "B11"],
   },
   {
     id: "456",
@@ -54,6 +55,7 @@ export const eventBlocks = [
           "https://unis.edu.gt/wp-content/uploads/2020/06/oscar-Rojas-2.jpg",
       },
     ],
+    takenSeats: ["A1", "A5", "A6", "A7", "A8", "B8", "B9", "B10", "B11"],
   },
   {
     id: "789",
@@ -82,5 +84,6 @@ export const eventBlocks = [
           "https://unis.edu.gt/wp-content/uploads/2020/06/oscar-Rojas-2.jpg",
       },
     ],
+    takenSeats: ["A5", "A6", "A7", "A8", "B8", "B9", "B10", "B11"],
   },
 ];

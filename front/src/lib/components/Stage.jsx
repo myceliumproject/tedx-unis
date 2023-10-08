@@ -1,5 +1,6 @@
 // @ts-check
 import SeatImg from "$/assets/seat.svg?react";
+import { useMemo } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 /** @type {[string[], string[], string[]][]} */
@@ -62,7 +63,7 @@ function Seat({
           width="100%"
           height="100%"
           stroke="black"
-          fill={disabled ? "gray" : selected ? "#CC9865" : "white"}
+          fill={selected ? "#CC9865" : disabled ? "gray" : "white"}
         />
       </div>
     </OverlayTrigger>
@@ -71,9 +72,58 @@ function Seat({
 
 export default function Stage({
   selected,
+  taken,
+  progressiveUnblock = false,
   onSelect = undefined,
   readOnly = false,
 }) {
+  const blockedFromRow = useMemo(() => {
+    if (progressiveUnblock) {
+      let lastReservedRow = taken
+        .map((s) => s[0])
+        .sort()
+        .reverse()[0];
+      if (lastReservedRow < "C") lastReservedRow = "C";
+
+      let totalSeats = 0;
+      let takenSeats = 0;
+      for (const row of seatArrangement) {
+        for (const side of row) {
+          for (const seat of side) {
+            if (seat[0] <= lastReservedRow) {
+              totalSeats += 1;
+              if (taken.includes(seat)) {
+                takenSeats += 1;
+              }
+            }
+          }
+        }
+      }
+
+      let blockedRow;
+      if (takenSeats / totalSeats < 0.6) {
+        if (lastReservedRow <= "C") {
+          blockedRow = "D";
+        } else {
+          blockedRow = String.fromCharCode(lastReservedRow.charCodeAt(0) + 1);
+        }
+      } else {
+        if (lastReservedRow <= "C") {
+          blockedRow = "E";
+        } else {
+          blockedRow = String.fromCharCode(lastReservedRow.charCodeAt(0) + 2);
+        }
+      }
+
+      if (blockedRow > "K") {
+        return "K";
+      } else {
+        return blockedRow;
+      }
+    }
+    return "K";
+  }, [progressiveUnblock, taken]);
+
   return (
     <div className="overflow-x-auto pt-4">
       <div
@@ -105,6 +155,7 @@ export default function Stage({
                   seat={c}
                   selected={c === selected}
                   onSelect={onSelect}
+                  disabled={taken.includes(c) || c >= blockedFromRow}
                   readOnly={readOnly}
                 />
               ))}
@@ -114,17 +165,18 @@ export default function Stage({
                 display: "inline-flex",
               }}
             >
-              {i === 1 ? <Spacer seats={4} /> : null}
+              {i === 1 ? <Spacer seats={3.5} /> : null}
               {r[1].map((c) => (
                 <Seat
                   key={c}
                   seat={c}
                   selected={c === selected}
                   onSelect={onSelect}
+                  disabled={taken.includes(c) || c >= blockedFromRow}
                   readOnly={readOnly}
                 />
               ))}
-              {i === 1 ? <Spacer seats={4} /> : null}
+              {i === 1 ? <Spacer seats={3.5} /> : null}
             </div>
             <div
               style={{
@@ -139,6 +191,7 @@ export default function Stage({
                   seat={c}
                   selected={c === selected}
                   onSelect={onSelect}
+                  disabled={taken.includes(c) || c >= blockedFromRow}
                   readOnly={readOnly}
                 />
               ))}
