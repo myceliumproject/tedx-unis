@@ -26,7 +26,11 @@ export default function EventBlock({ page = null, seat = null, data }) {
           {new Date(data.datetime).toLocaleTimeString()}
         </Card.Subtitle>
       </Card.Body>
-      <Accordion flush className="border-top border-bottom border-tertiary">
+      <Accordion
+        alwaysOpen
+        flush
+        className="border-top border-bottom border-tertiary"
+      >
         {data.events.map((ev, i) => (
           <Accordion.Item eventKey={i.toString()} key={i}>
             <Accordion.Header>
