@@ -1,5 +1,4 @@
 /* eslint-disable react-refresh/only-export-components */
-import axios from "axios";
 import { useLayoutEffect } from "react";
 import { createLocalStorageContext } from "./localStorage";
 
@@ -7,6 +6,7 @@ const { Provider: RawUserProvider, useContext: useUser } =
   createLocalStorageContext<{
     id: string;
     token: string;
+    tokenExp: number;
     email: string;
     name: string;
     tickets: {
@@ -21,18 +21,16 @@ const { Provider: RawUserProvider, useContext: useUser } =
   } | null>("user", (user) => user);
 
 function EffectsHandler({ children }: { children: React.ReactNode }) {
-  const [user] = useUser();
+  const [user, setUser] = useUser();
 
   useLayoutEffect(() => {
-    if (user?.token) {
-      axios.defaults.headers.common["X-Access-Token"] = user.token;
-    } else {
-      delete axios.defaults.headers.common["X-Access-Token"];
+    if (
+      (user?.tokenExp ?? null) !== null &&
+      Date.now() / 1000 > user.tokenExp
+    ) {
+      setUser(null);
     }
-    return () => {
-      delete axios.defaults.headers.common["X-Access-Token"];
-    };
-  }, [user?.token]);
+  }, [setUser, user?.tokenExp]);
 
   return children;
 }
