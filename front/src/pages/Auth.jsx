@@ -4,12 +4,13 @@ import { wrapSubmit } from "$/lib/utils";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useEvent from "react-use-event-hook";
 
 export default function Auth() {
   const [user, setUser] = useUser();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -33,8 +34,8 @@ export default function Auth() {
   });
 
   useLayoutEffect(() => {
-    if (user !== null) navigate("/");
-  }, [navigate, user]);
+    if (user !== null) navigate(searchParams.get("return") ?? "/");
+  }, [navigate, searchParams, user]);
 
   return (
     <div className="p-3 text-center d-flex align-items-center justify-content-center align-self-center">

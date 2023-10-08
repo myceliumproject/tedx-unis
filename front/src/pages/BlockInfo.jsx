@@ -7,12 +7,15 @@ import axios from "axios";
 import { useLayoutEffect, useState } from "react";
 import { Button, Card, Modal, Stack } from "react-bootstrap";
 import QRCode from "react-qr-code";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import useEvent from "react-use-event-hook";
 
 export default function BlockInfo() {
   const { id: eventBlockId } = useParams();
+  const [searchParams] = useSearchParams();
   const [eventBlock, setEventBlock] = useState(null);
+
+  const navigate = useNavigate();
 
   const [user] = useUser();
   const userTicket = user
@@ -28,13 +31,13 @@ export default function BlockInfo() {
     });
   }, [eventBlockId]);
 
-  const [selectedSeat, setSelectedSeat] = useState(null);
+  const [selectedSeat, setSelectedSeat] = useState(searchParams.get("seat"));
   const [seatConfirmationDialog, setSeatConfirmationDialog] = useState(false);
   const confirmSeat = useEvent(() => {
     let post = {
       seat: selectedSeat,
-      userId: "TEST2", //user.id,
-      name: "TEST2", //user.name
+      userId: user.id,
+      name: user.name,
     };
     axios
       .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post)
@@ -80,7 +83,17 @@ export default function BlockInfo() {
                   />
                   <Card.Body>
                     <Button
-                      onClick={() => setSeatConfirmationDialog(true)}
+                      onClick={() =>
+                        user === null
+                          ? navigate(
+                              `/auth?return=${encodeURIComponent(
+                                window.location.pathname +
+                                  "?seat=" +
+                                  selectedSeat
+                              )}`
+                            )
+                          : setSeatConfirmationDialog(true)
+                      }
                       disabled={selectedSeat === null}
                     >
                       Confirmar
