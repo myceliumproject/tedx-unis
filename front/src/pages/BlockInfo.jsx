@@ -1,15 +1,14 @@
 // @ts-check
+import { urlApi } from "$/environment";
 import EventBlock from "$/lib/components/EventBlock";
 import Stage from "$/lib/components/Stage";
 import { useUser } from "$/lib/hooks/user";
-import * as staticData from "$/lib/staticData";
+import axios from "axios";
 import { useLayoutEffect, useState } from "react";
 import { Button, Card, Modal, Stack } from "react-bootstrap";
 import QRCode from "react-qr-code";
 import { useParams } from "react-router-dom";
 import useEvent from "react-use-event-hook";
-import axios from "axios";
-import { urlApi } from "$/environment";
 
 export default function BlockInfo() {
   const { id: eventBlockId } = useParams();
@@ -24,21 +23,19 @@ export default function BlockInfo() {
     axios.get(urlApi + `/eventblock/get/${eventBlockId}`).then((res) => {
       if (res.data.code === 0) {
         //console.log(res.data)
-        setEventBlock(res.data.data)
+        setEventBlock(res.data.data);
       }
     });
-    //setEventBlock(staticData.find((eb) => eb.id === eventBlockId));
   }, [eventBlockId]);
 
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [seatConfirmationDialog, setSeatConfirmationDialog] = useState(false);
   const confirmSeat = useEvent(() => {
-
     let post = {
       seat: selectedSeat,
-      userId: 'TEST2',//user.id, 
-      name: 'TEST2',//user.name
-    }
+      userId: "TEST2", //user.id,
+      name: "TEST2", //user.name
+    };
     axios
       .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post)
       .then((res) => {
