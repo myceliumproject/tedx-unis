@@ -3,6 +3,7 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { handler } from "../middleware.js";
 import { createUserToken } from "../token.js";
+import { transporter, emailSpecs } from "../email.js";
 
 const router = Router();
 
@@ -24,11 +25,18 @@ router.post("/authrequest", (req, res) => {
     code: randomCode(),
   };
 
-  res.json({
-    code: 0,
-    data:
-      process.env.NODE_ENV === "development" ? emailCodes[email].code : null,
-  });
+  let mailSpecs = emailSpecs(req.body.email, "Código de Verificación", 
+    `Su código de verificación es: ${emailCodes[email].code}`
+  )
+
+  transporter.sendMail(mailSpecs, (error, info) => {
+    if (error) {
+      return res.status(500).json({ error: 'Email could not be sent' });
+    } else {
+      return res.status(200).json({ code: 0, message: 'Email sent successfully' });
+    }
+  })
+
 });
 
 router.post(
