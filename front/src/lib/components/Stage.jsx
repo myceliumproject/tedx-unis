@@ -79,10 +79,11 @@ export default function Stage({
 }) {
   const blockedFromRow = useMemo(() => {
     if (progressiveUnblock) {
-      let lastReservedRow = taken
-        .map((s) => s[0])
-        .sort()
-        .reverse()[0];
+      let lastReservedRow =
+        taken
+          .map((s) => s[0])
+          .sort()
+          .reverse()[0] ?? "A";
       if (lastReservedRow < "C") lastReservedRow = "C";
 
       let totalSeats = 0;

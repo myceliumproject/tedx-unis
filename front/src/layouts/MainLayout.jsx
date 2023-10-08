@@ -1,9 +1,10 @@
+import ErrorBoundary from "$/routes/ErrorBoundary";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 
 export default function MainLayout() {
   return (
-    <>
+    <ErrorBoundary>
       <Navbar expand="lg" bg="primary" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">
@@ -20,8 +21,10 @@ export default function MainLayout() {
         </Container>
       </Navbar>
       <Container className="py-4">
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </Container>
-    </>
+    </ErrorBoundary>
   );
 }
