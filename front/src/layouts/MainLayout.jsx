@@ -1,8 +1,11 @@
+import { useUser } from "$/lib/hooks/user";
 import ErrorBoundary from "$/routes/ErrorBoundary";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 
 export default function MainLayout() {
+  const [user] = useUser();
+
   return (
     <ErrorBoundary>
       <Navbar expand="lg" bg="primary" variant="dark">
@@ -16,6 +19,11 @@ export default function MainLayout() {
               <Nav.Link as={Link} to="/">
                 Bloques
               </Nav.Link>
+              {user === null ? (
+                <Nav.Link as={Link} to="/auth">
+                  Inicio de sesión
+                </Nav.Link>
+              ) : null}
             </Nav>
           </Navbar.Collapse>
         </Container>
