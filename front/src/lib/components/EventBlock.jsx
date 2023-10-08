@@ -11,13 +11,15 @@ export default function EventBlock({ page = null, seat = null, data }) {
         className="object-fit-cover"
         style={{ height: "16rem" }}
       />
-      <Card.ImgOverlay>
-        {seat !== null ? (
-          <Badge color="primary text-nowrap" pill>
-            <MdCheck /> Reservado: {seat}
-          </Badge>
-        ) : null}
-      </Card.ImgOverlay>
+      {seat !== null ? (
+        <Badge
+          color="primary text-nowrap"
+          style={{ position: "absolute", top: "1rem", left: "1rem" }}
+          pill
+        >
+          <MdCheck /> Reservado: {seat}
+        </Badge>
+      ) : null}
       <Card.Body>
         <Card.Subtitle>
           {new Date(data.datetime).toLocaleDateString()} -{" "}
