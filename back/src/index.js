@@ -5,6 +5,7 @@ import express from "express";
 import { createServer } from "http";
 import morgan from "morgan";
 import { Server } from "socket.io";
+import userRouter from "./controllers/user.js";
 import { db } from "./db.js";
 
 const app = express();
@@ -25,9 +26,7 @@ app.use(
   })
 );
 
-app.get("/hello", (req, res) => {
-  res.json("hello!");
-});
+app.use("/user", userRouter);
 
 /** TEST API **/
 app.get("/test", async (req, res) => {
