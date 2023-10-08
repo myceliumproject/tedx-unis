@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 const emailpw = process.env.EMAIL_PASS
 
 export const transporter = nodemailer.createTransport({
-    port: 465,               // true for 465, false for other ports
+    port: 465,
     host: "smtp.gmail.com",
        auth: {
             user: 'zmyceliumproject@gmail.com',
