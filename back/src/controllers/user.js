@@ -3,7 +3,7 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { handler } from "../middleware.js";
 import { createUserToken } from "../token.js";
-import { transporter, emailSpecs } from "../email.js";
+import { transporter, emailSpecsNoAttachment } from "../email.js";
 
 const router = Router();
 
@@ -25,7 +25,7 @@ router.post("/authrequest", (req, res) => {
     code: randomCode(),
   };
 
-  let mailSpecs = emailSpecs(req.body.email, "Código de Verificación", 
+  let mailSpecs = emailSpecsNoAttachment(req.body.email, "Código de Verificación", 
     `Su código de verificación es: ${emailCodes[email].code}`
   )
 
