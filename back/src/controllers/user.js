@@ -1,9 +1,9 @@
 // @ts-check
 import { Router } from "express";
 import { db } from "../db.js";
+import { emailSpecs, transporter } from "../email.js";
 import { handler } from "../middleware.js";
 import { createUserToken } from "../token.js";
-import { transporter, emailSpecsNoAttachment } from "../email.js";
 
 const router = Router();
 
@@ -25,18 +25,21 @@ router.post("/authrequest", (req, res) => {
     code: randomCode(),
   };
 
-  let mailSpecs = emailSpecsNoAttachment(req.body.email, "Código de Verificación", 
+  let mailSpecs = emailSpecs(
+    req.body.email,
+    "Código de Verificación",
     `Su código de verificación es: ${emailCodes[email].code}`
-  )
+  );
 
   transporter.sendMail(mailSpecs, (error, info) => {
     if (error) {
-      return res.status(500).json({ error: 'Email could not be sent' });
+      return res.status(500).json({ error: "Email could not be sent" });
     } else {
-      return res.status(200).json({ code: 0, message: 'Email sent successfully' });
+      return res
+        .status(200)
+        .json({ code: 0, message: "Email sent successfully" });
     }
-  })
-
+  });
 });
 
 router.post(
@@ -72,7 +75,7 @@ router.post(
       foundUser = { ...userSs.data(), id: userSs.id };
     }
 
-    const { token, expiration } = createUserToken(foundUser.id);
+    const { token, expiration } = createUserToken(foundUser.id, "user");
 
     res.json({
       code: 0,

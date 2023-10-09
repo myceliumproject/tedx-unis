@@ -60,3 +60,28 @@ export function authenticated(userType, getUser = true) {
     next();
   });
 }
+
+export function generateTicketToken(userId, blockId, seat) {
+  return jwt.sign(
+    {
+      sub: userId,
+      userBlock: blockId,
+      userSeat: seat,
+    },
+    TOKEN_SECRET
+  );
+}
+
+/**
+ *
+ * @param {string} token
+ * @returns {import("jsonwebtoken").JwtPayload}
+ */
+export function verifyTicketToken(token) {
+  try {
+    // @ts-ignore
+    return jwt.verify(token, TOKEN_SECRET);
+  } catch {
+    return null;
+  }
+}

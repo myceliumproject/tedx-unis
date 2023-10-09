@@ -1,6 +1,13 @@
 // @ts-check
+import { format } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
+import es from "date-fns/locale/es/index.js";
 import { Router } from "express";
+import QRCode from "qrcode";
 import { db } from "../db.js";
+import { emailSpecs, transporter } from "../email.js";
+import { handler } from "../middleware.js";
+import { authenticated, generateTicketToken } from "../token.js";
 
 const router = Router();
 
@@ -110,7 +117,7 @@ router.get("/list", async (req, res) => {
     const eventBlocks = [];
 
     eventBlocksSnapshot.forEach((doc) => {
-      const eventBlockData = doc.data();
+      const { takenSeatAssignments, waitlist, ...eventBlockData } = doc.data();
       eventBlocks.push({ id: doc.id, ...eventBlockData });
     });
 
@@ -143,10 +150,16 @@ router.get("/get/:eventBlockId", async (req, res) => {
 }
  * **/
 
-router.patch("/reserve/:id_eventblock", async (req, res) => {
-  try {
+router.patch(
+  "/reserve/:id_eventblock",
+  authenticated("user"),
+  handler(async (req, res) => {
+    if (!req.user) {
+      res.status(401).json({ code: -1, message: "Unauthorized", data: null });
+      return;
+    }
     const { id_eventblock } = req.params;
-    const { userId, name, seat } = req.body;
+    const { seat } = req.body;
 
     const eventBlockRef = db.collection("event_blocks").doc(id_eventblock);
     const eventBlockSnapshot = await eventBlockRef.get();
@@ -156,26 +169,26 @@ router.patch("/reserve/:id_eventblock", async (req, res) => {
 
     /**Check if User Exists */
     const existingAssignment = takenSeatAssignments.find(
-      (assignment) => assignment.userId === userId
+      (assignment) => assignment.userId === req.user.id
     );
     if (existingAssignment) {
-      return res
-        .status(400)
-        .json({ error: "User already has a seat assigned" });
+      res.status(400).json({ error: "Ya tienes un asiento asignado." });
+      return;
     }
 
     const takenSeats = eventBlockData.takenSeats;
     if (takenSeats.includes(seat)) {
-      return res.status(400).json({ error: "Seat already taken" });
+      res.status(400).json({ error: "Asiento ya ocupado." });
+      return;
     }
 
     const blockedRow = getBlockedRow(eventBlockData.takenSeats);
-    console.log(seat, blockedRow);
     if (seat[0] >= blockedRow) {
-      return res.status(400).json({ error: "Seat blocked" });
+      res.status(400).json({ error: "Asiento bloqueado" });
+      return;
     }
 
-    const newAssignment = { userId, name, seat };
+    const newAssignment = { userId: req.user.id, name: req.user.name, seat };
     takenSeatAssignments.push(newAssignment);
     takenSeats.push(seat);
 
@@ -183,10 +196,64 @@ router.patch("/reserve/:id_eventblock", async (req, res) => {
       takenSeatAssignments,
       takenSeats,
     });
-    res.status(200).json({ message: "Success" });
-  } catch (error) {
-    res.status(500).json({ error: "Error 500" });
-  }
-});
+
+    const userRef = db.collection("user").doc(req.user.id);
+
+    const tickets = [...req.user.tickets];
+
+    const tokenUrl = new URL(
+      process.env.PUBLIC_SITE_URL + "/staff/ticket?name="
+    );
+
+    tokenUrl.searchParams.set("name", req.user.name);
+    tokenUrl.searchParams.set("block", id_eventblock);
+    tokenUrl.searchParams.set("seat", seat);
+    tokenUrl.searchParams.set(
+      "ticket",
+      generateTicketToken(req.user.id, id_eventblock, seat)
+    );
+
+    const newTicket = {
+      blockId: id_eventblock,
+      seat,
+      token: tokenUrl.toString(),
+    };
+    tickets.push(newTicket);
+
+    const qrcodeTicket = await QRCode.toBuffer(tokenUrl.toString(), {
+      type: "png",
+    });
+
+    const blockDate = utcToZonedTime(
+      new Date(eventBlockData.datetime),
+      "America/Guatemala"
+    );
+
+    let mailSpecs = emailSpecs(
+      req.user.email,
+      "Ticket de Ingreso TedxUnis",
+      `Bienvenido a la experiencia TEDxUnis, este es tu QR de ingreso para el bloque del ${format(
+        blockDate,
+        "dd/MM/yyyy, hh:mm aa",
+        { locale: es }
+      )}. Debes mostrar el código QR para ingresar, tenlo a la mano cuando te dirijas al ingreso.`
+    );
+
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailSpecs, (error, info) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    await userRef.update({
+      tickets,
+    });
+    res.status(200).json({ code: 0, data: newTicket });
+  })
+);
 
 export default router;
