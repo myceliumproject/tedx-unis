@@ -3,7 +3,7 @@ import EventBlock from "$/lib/components/EventBlock";
 import { useUser } from "$/lib/hooks/user";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
-import { Stack } from "react-bootstrap";
+import { Col, Row, Stack } from "react-bootstrap";
 
 export default function Home() {
   const [eventBlocks, setEventBlocks] = useState([]);
@@ -22,18 +22,22 @@ export default function Home() {
     <div>
       <h1 className="text-center">Bloques</h1>
       <Stack gap={3}>
-        {eventBlocks.map((eb, i) => (
-          <EventBlock
-            key={i}
-            page="home"
-            data={eb}
-            seat={
-              user !== null
-                ? user.tickets.find((t) => t.blockId === eb.id)?.seat ?? null
-                : null
-            }
-          />
-        ))}
+        <Row className="gy-4">
+          {eventBlocks.map((eb, i) => (
+            <Col key={i} md={6} lg={4}>
+              <EventBlock
+                page="home"
+                data={eb}
+                seat={
+                  user !== null
+                    ? user.tickets.find((t) => t.blockId === eb.id)?.seat ??
+                      null
+                    : null
+                }
+              />
+            </Col>
+          ))}
+        </Row>
       </Stack>
     </div>
   );
