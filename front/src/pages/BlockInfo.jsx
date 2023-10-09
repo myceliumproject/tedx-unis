@@ -15,11 +15,17 @@ export default function BlockInfo() {
   const [searchParams] = useSearchParams();
   const [eventBlock, setEventBlock] = useState(null);
 
+  const [errorMsg, setErrorMsg] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const handleShowError = () => setShowErrorModal(true);
+  const handleCloseError = () => setShowErrorModal(false);
+
   const navigate = useNavigate();
 
-  const [user] = useUser();
+  const [user, setUser] = useUser();
   const userTicket = user
-    ? user.tickets.find((t) => t.blockId === eventBlock?.id) ?? null
+    ? user.tickets.find((t) => t.blockId === eventBlockId) ?? null
     : null;
 
   useLayoutEffect(() => {
@@ -40,10 +46,20 @@ export default function BlockInfo() {
       name: user.name,
     };
     axios
-      .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post)
+      .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post, {
+        headers: { "X-Access-Token": user.token },
+      })
       .then((res) => {
         if (res.data.code === 0) {
-          setEventBlock(res.data.data);
+          const tickets = [...user.tickets];
+          tickets.push(res.data.data);
+          setUser({ ...user, tickets });
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          setErrorMsg(error.response.data.error);
+          handleShowError();
         }
       });
     setSeatConfirmationDialog(false);
@@ -51,6 +67,17 @@ export default function BlockInfo() {
 
   return (
     <>
+      <Modal show={showErrorModal} onHide={handleCloseError}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{errorMsg}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseError}>
+            Entendido
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Stack gap={4}>
         {eventBlock !== null ? (
           <>
