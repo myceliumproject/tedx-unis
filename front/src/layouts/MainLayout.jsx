@@ -1,3 +1,5 @@
+import Logo from "$/lib/components/Logo";
+import TEDxLogo from "$/lib/components/TEDxLogo";
 import { useUser } from "$/lib/hooks/user";
 import ErrorBoundary from "$/routes/ErrorBoundary";
 import { Container, Nav, Navbar } from "react-bootstrap";
@@ -11,7 +13,7 @@ export default function MainLayout() {
       <Navbar expand="lg" bg="primary" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            TEDxUNIS
+            <TEDxLogo />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -25,6 +27,12 @@ export default function MainLayout() {
                 </Nav.Link>
               ) : null}
             </Nav>
+            <Navbar.Text>
+              Powered by:{" "}
+              <Link to="/by">
+                <Logo /> Mycelium
+              </Link>
+            </Navbar.Text>
           </Navbar.Collapse>
         </Container>
       </Navbar>

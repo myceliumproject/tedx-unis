@@ -5,6 +5,7 @@ import Home from "$/pages/Home";
 import type { RouteObject } from "react-router-dom";
 import NotFound from "./NotFound";
 // Staff
+import Creditos from "$/pages/Credits";
 import ListaBloques from "$/pages/staff/ListaBloques";
 import StaffLogin from "$/pages/staff/StaffLogin";
 import StaffRegister from "$/pages/staff/StaffRegister";
@@ -24,6 +25,10 @@ const routes: RouteObject[] = [
       {
         path: "/auth",
         element: <Auth />,
+      },
+      {
+        path: "/by",
+        element: <Creditos />,
       },
       {
         path: "*",
