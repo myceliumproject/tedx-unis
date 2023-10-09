@@ -12,11 +12,11 @@ export const transporter = nodemailer.createTransport({
   secure: true,
 });
 
-export function emailSpecs(to, subject, text) {
+export function emailSpecs(to, subject, html) {
   return {
     from: "zmyceliumproject@gmail.com",
     to: to,
     subject: subject,
-    text: text,
+    html: html,
   };
 }

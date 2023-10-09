@@ -1,4 +1,5 @@
 // @ts-check
+import cors from "cors";
 import { format } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
 import es from "date-fns/locale/es/index.js";
@@ -201,9 +202,7 @@ router.patch(
 
     const tickets = [...req.user.tickets];
 
-    const tokenUrl = new URL(
-      process.env.PUBLIC_SITE_URL + "/staff/ticket?name="
-    );
+    const tokenUrl = new URL(process.env.PUBLIC_SITE_URL + "/staff/ticket");
 
     tokenUrl.searchParams.set("name", req.user.name);
     tokenUrl.searchParams.set("block", id_eventblock);
@@ -220,9 +219,17 @@ router.patch(
     };
     tickets.push(newTicket);
 
-    const qrcodeTicket = await QRCode.toBuffer(tokenUrl.toString(), {
-      type: "png",
-    });
+    const qrcodeImgUrl = new URL(
+      process.env.PUBLIC_API_URL + "/eventblock/qrcode"
+    );
+
+    qrcodeImgUrl.searchParams.set("name", req.user.name);
+    qrcodeImgUrl.searchParams.set("block", id_eventblock);
+    qrcodeImgUrl.searchParams.set("seat", seat);
+    qrcodeImgUrl.searchParams.set(
+      "ticket",
+      generateTicketToken(req.user.id, id_eventblock, seat)
+    );
 
     const blockDate = utcToZonedTime(
       new Date(eventBlockData.datetime),
@@ -232,11 +239,15 @@ router.patch(
     let mailSpecs = emailSpecs(
       req.user.email,
       "Ticket de Ingreso TedxUnis",
-      `Bienvenido a la experiencia TEDxUnis, este es tu QR de ingreso para el bloque del ${format(
+      `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${
+        process.env.PUBLIC_SITE_URL
+      }/tedxblack.svg"/><h1 style="color: #ae0036">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
         blockDate,
         "dd/MM/yyyy, hh:mm aa",
         { locale: es }
-      )}. Debes mostrar el código QR para ingresar, tenlo a la mano cuando te dirijas al ingreso.`
+      )}. Tu asiento es el <b>${seat}</b></p><img style="width: 30rem" src="${qrcodeImgUrl.toString()}"/><p>Debes mostrar el código QR para ingresar, tenlo a la mano cuando te dirijas al ingreso.</p><p style="font-size: 0.8rem; color: gray">Powered by: Mycelium <img style="width: 1rem" src="${
+        process.env.PUBLIC_SITE_URL
+      }/mycelium.svg"/></p></div>`
     );
 
     await new Promise((resolve, reject) => {
@@ -253,6 +264,41 @@ router.patch(
       tickets,
     });
     res.status(200).json({ code: 0, data: newTicket });
+  })
+);
+
+router.get(
+  "/qrcode",
+  cors({
+    origin: ["*"],
+  }),
+  handler(async (req, res, next) => {
+    const name = req.query.name;
+    const block = req.query.block;
+    const seat = req.query.seat;
+    const ticket = req.query.ticket;
+
+    if (
+      typeof name !== "string" ||
+      typeof block !== "string" ||
+      typeof seat !== "string" ||
+      typeof ticket !== "string"
+    ) {
+      next();
+      return;
+    }
+
+    const tokenUrl = new URL(process.env.PUBLIC_SITE_URL + "/staff/ticket");
+
+    tokenUrl.searchParams.set("name", name);
+    tokenUrl.searchParams.set("block", block);
+    tokenUrl.searchParams.set("seat", seat);
+    tokenUrl.searchParams.set("ticket", ticket);
+
+    res
+      .status(200)
+      .contentType("image/png")
+      .send(await QRCode.toBuffer(tokenUrl.toString()));
   })
 );
 
