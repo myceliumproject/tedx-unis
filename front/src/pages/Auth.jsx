@@ -53,7 +53,7 @@ export default function Auth() {
                 value={email}
                 onChange={(e) => setEmail(e.currentTarget.value)}
               />
-              <label for="email">Correo electrónico</label>
+              <label htmlFor="email">Correo electrónico</label>
             </div>
             <div className="form-floating mb-3">
               <input
@@ -64,7 +64,7 @@ export default function Auth() {
                 value={name}
                 onChange={(e) => setName(e.currentTarget.value)}
               />
-              <label for="name">Nombre</label>
+              <label htmlFor="name">Nombre</label>
             </div>
             <button
               type="submit"
