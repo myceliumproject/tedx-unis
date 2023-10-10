@@ -12,7 +12,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", process.env.PUBLIC_SITE_URL],
     credentials: true,
   },
 });
@@ -21,7 +21,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", process.env.PUBLIC_SITE_URL],
     credentials: true,
   })
 );
