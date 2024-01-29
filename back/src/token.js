@@ -5,6 +5,8 @@ import { handler } from "./middleware.js";
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET ?? "pleasesetenvvarforsecurity";
 
+const userTypeLevels = ["user", "staff", "admin"];
+
 export function createUserToken(id, userType) {
   const expiration = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60;
   return {
@@ -44,7 +46,10 @@ export function authenticated(userType, getUser = true) {
       res.status(403).json({ code: -1, message: "Forbidden" });
       return;
     }
-    if (parsedToken.userType !== userType) {
+    if (
+      userTypeLevels.indexOf(parsedToken.userType) <
+      userTypeLevels.indexOf(userType)
+    ) {
       res.status(401).json({ code: -1, message: "Unauthorized" });
       return;
     }

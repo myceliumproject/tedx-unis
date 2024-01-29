@@ -17,6 +17,7 @@ type EventBlock = {
     userId: string;
     name: string;
     seat: string; // Seat name (A1, K13...)
+    attended: boolean;
   }[];
   waitlist: {
     // STAFF ONLY: This information must ONLY be sent to STAFF users

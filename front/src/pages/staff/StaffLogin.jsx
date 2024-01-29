@@ -10,7 +10,7 @@ export default function StaffLogin() {
             className="form-control rounded"
             placeholder="Correo electrónico"
           />
-          <label for="email">Correo electrónico</label>
+          <label htmlFor="email">Correo electrónico</label>
         </div>
         <button
           type="button"

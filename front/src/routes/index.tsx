@@ -6,6 +6,7 @@ import type { RouteObject } from "react-router-dom";
 import NotFound from "./NotFound";
 // Staff
 import Creditos from "$/pages/Credits";
+import Attendance from "$/pages/staff/Attendance";
 import ListaBloques from "$/pages/staff/ListaBloques";
 import StaffLogin from "$/pages/staff/StaffLogin";
 import StaffRegister from "$/pages/staff/StaffRegister";
@@ -15,19 +16,19 @@ const routes: RouteObject[] = [
     element: <MainLayout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home />,
       },
       {
-        path: "/block/:id",
+        path: "block/:id",
         element: <BlockInfo />,
       },
       {
-        path: "/auth",
+        path: "auth",
         element: <Auth />,
       },
       {
-        path: "/by",
+        path: "by",
         element: <Creditos />,
       },
       {
@@ -37,18 +38,22 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: "/staff",
+    path: "staff",
     element: <MainLayout />,
     children: [
       {
-        path: "/staff/",
+        path: "",
         element: <ListaBloques />,
       },
       {
-        path: "/staff/register",
+        path: "register",
         element: <StaffRegister />,
       },
-      { path: "/staff/login", element: <StaffLogin /> },
+      { path: "login", element: <StaffLogin /> },
+      {
+        path: "attendance/:id",
+        element: <Attendance />,
+      },
       {
         path: "*",
         element: <NotFound />,

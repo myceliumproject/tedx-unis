@@ -50,7 +50,7 @@
 - [x] Login
 - [x] Register
 - [ ] Escaneo de QR
-- [ ] Lista de bloques y conferencias
-- [ ] Detalle de bloque
-- [ ] Detalle de conferencia
+- [x] Lista de bloques y conferencias
+- [x] Detalle de bloque
+- [x] Detalle de conferencia
 - [ ] Lista de asistentes por bloque

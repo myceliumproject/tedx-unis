@@ -56,7 +56,10 @@ export default function EventBlock({ page = null, seat = null, data }) {
               {seat !== null ? "Ver ticket" : "Conseguir asiento"}
             </Link>
           ) : page === "staff" ? (
-            <Link to={`/block/${data?.id}/assigned`} className="btn btn-primary">
+            <Link
+              to={`/staff/attendance/${data?.id}`}
+              className="btn btn-primary"
+            >
               Lista de asignados
             </Link>
           ) : null}

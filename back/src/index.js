@@ -5,6 +5,7 @@ import express from "express";
 import { createServer } from "http";
 import morgan from "morgan";
 import { Server } from "socket.io";
+import adminRouter from "./controllers/admins.js";
 import eventBlockRouter from "./controllers/eventblock.js";
 import userRouter from "./controllers/user.js";
 
@@ -28,6 +29,7 @@ app.use(
 
 app.use("/user", userRouter);
 app.use("/eventblock", eventBlockRouter);
+app.use("/admin", adminRouter);
 
 io.on("connection", (socket) => {
   console.log("socket connected");
