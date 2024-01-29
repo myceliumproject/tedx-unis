@@ -3,6 +3,7 @@ import EventBlock from "$/lib/components/EventBlock";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
 import {
+  Button,
   Col,
   FormControl,
   FormGroup,
@@ -15,6 +16,7 @@ import {
   Row,
   Stack,
 } from "react-bootstrap";
+import { MdLooks3, MdLooksOne, MdLooksTwo, MdSave } from "react-icons/md";
 
 export default function ListaBloques() {
   const [eventBlocks, setEventBlocks] = useState([]);
@@ -48,6 +50,20 @@ export default function ListaBloques() {
     setCurrentEdit(temp);
   };
 
+  const handleChangeEvents = (index, campo, valor) => {
+    let temp = { ...currentEdit };
+    temp.events[index][campo] = valor;
+    setCurrentEdit(temp);
+  };
+
+  const submitChange = () => {
+    axios.patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit)
+    .then((response) => {
+      setEventBlocks(response.data.data)
+      setModalEdit(false)
+    })
+  }
+
   return (
     <div>
       <Modal
@@ -78,7 +94,9 @@ export default function ListaBloques() {
                 <FormControl
                   type="date"
                   value={currentEdit.datetime?.split("T")[0]}
-                  onChange={(ev) => handleChange("fecha", ev.currentTarget.value)}
+                  onChange={(ev) =>
+                    handleChange("fecha", ev.currentTarget.value)
+                  }
                 />
               </FormGroup>
             </Col>
@@ -88,13 +106,97 @@ export default function ListaBloques() {
                 <FormControl
                   type="time"
                   value={currentEdit.datetime?.split("T")[1]}
-                  onChange={(ev) => handleChange("hora", ev.currentTarget.value)}
+                  onChange={(ev) =>
+                    handleChange("hora", ev.currentTarget.value)
+                  }
                 />
               </FormGroup>
             </Col>
           </Row>
           <br />
           <ModalTitle>Eventos</ModalTitle>
+          <Row>
+            {currentEdit?.events?.map((e, i) => (
+              <Col key={i} xs={12} lg={4}>
+                {i === 0 ? (
+                  <MdLooksOne
+                    style={{ fontSize: "44px" }}
+                    className="text-primary"
+                  />
+                ) : i === 1 ? (
+                  <MdLooksTwo
+                    style={{ fontSize: "44px" }}
+                    className="text-primary"
+                  />
+                ) : (
+                  <MdLooks3
+                    style={{ fontSize: "44px" }}
+                    className="text-primary"
+                  />
+                )}
+                <br />
+                <FormGroup>
+                  <FormLabel>Nombre</FormLabel>
+                  <FormControl
+                    type="text"
+                    value={e.name}
+                    onChange={(ev) =>
+                      handleChangeEvents(i, "name", ev.currentTarget.value)
+                    }
+                  />
+                </FormGroup>
+                <br />
+                <FormGroup>
+                  <FormLabel>Descripción</FormLabel>
+                  <FormControl
+                    as="textarea"
+                    value={e.description}
+                    onChange={(ev) =>
+                      handleChangeEvents(
+                        i,
+                        "description",
+                        ev.currentTarget.value
+                      )
+                    }
+                  />
+                </FormGroup>
+                <br />
+                <FormGroup>
+                  <FormLabel>Orador/a</FormLabel>
+                  <FormControl
+                    type="text"
+                    value={e.speaker}
+                    onChange={(ev) =>
+                      handleChangeEvents(i, "speaker", ev.currentTarget.value)
+                    }
+                  />
+                </FormGroup>
+                <br />
+                <FormGroup>
+                  <FormLabel>Imagen Orador/a</FormLabel>
+                  <FormControl
+                    type="text"
+                    value={e.speakerImg}
+                    onChange={(ev) =>
+                      handleChangeEvents(
+                        i,
+                        "speakerImg",
+                        ev.currentTarget.value
+                      )
+                    }
+                  />
+                  <br />
+                  <Image style={{ maxWidth: "100%" }} src={e.speakerImg} />
+                </FormGroup>
+              </Col>
+            ))}
+          </Row>
+          <br />
+          <div style={{ display: "flex", justifyContent: "end" }}>
+            <Button variant="primary" onClick={submitChange}>
+              <MdSave /> Guardar
+            </Button>
+          </div>
         </ModalBody>
       </Modal>
       <h1 className="text-center">Bloques</h1>

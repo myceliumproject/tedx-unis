@@ -7,6 +7,29 @@ import { sendEmail } from "../email.js";
 
 const router = Router();
 
+router.patch("/update/block/:id_block", async (req, res) => {
+  try {
+    const id = req.params.id_block;
+    const data = req.body;
+
+    await db.collection("event_blocks").doc(id).update(data);
+
+    const eventBlocksSnapshot = await db.collection("event_blocks").get();
+    const eventBlocks = [];
+
+    eventBlocksSnapshot.forEach((doc) => {
+      const { takenSeatAssignments, waitlist, ...eventBlockData } = doc.data();
+      eventBlocks.push({ id: doc.id, ...eventBlockData });
+    });
+
+    res.status(200).json({ code: 0, data: eventBlocks });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error 500" });
+  }
+});
+
 router.get("/report/:email", async (req, res) => {
   try {
     const eventBlockSnapshot = await db.collection("event_blocks").get();
