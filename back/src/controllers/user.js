@@ -3,7 +3,7 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { emailSpecs, transporter } from "../email.js";
 import { handler } from "../middleware.js";
-import { createUserToken } from "../token.js";
+import { authenticated, createUserToken } from "../token.js";
 
 const router = Router();
 
@@ -61,8 +61,10 @@ router.post(
       .collection("user")
       .where("email", "==", email)
       .get();
+    /** @type {{ id: string; userType: "user" | "staff" | "admin" }} */
     let foundUser;
     if (foundUsers.docs.length > 0) {
+      // @ts-expect-error data() doesn't have the appropriate typing for this
       foundUser = { ...foundUsers.docs[0].data(), id: foundUsers.docs[0].id };
     } else {
       const userRef = await db.collection("user").add({
@@ -70,12 +72,17 @@ router.post(
         name: savedCode.name,
         tickets: [],
         waitlist: [],
+        userType: "user",
       });
       const userSs = await userRef.get();
+      // @ts-expect-error data() doesn't have the appropriate typing for this
       foundUser = { ...userSs.data(), id: userSs.id };
     }
 
-    const { token, expiration } = createUserToken(foundUser.id, "user");
+    const { token, expiration } = createUserToken(
+      foundUser.id,
+      foundUser.userType
+    );
 
     res.json({
       code: 0,
@@ -87,5 +94,22 @@ router.post(
     });
   })
 );
+
+router.post("/changetype", authenticated("admin", false), async (req, res) => {
+  const { email, type } = req.body;
+
+  const foundUsers = await db
+    .collection("user")
+    .where("email", "==", email)
+    .get();
+
+  if (foundUsers.docs.length === 0)
+    return res.json({ code: 1, message: "Unknown user", data: null });
+  const foundUserSs = foundUsers.docs[0];
+
+  foundUserSs.ref.update({
+    userType: type,
+  });
+});
 
 export default router;

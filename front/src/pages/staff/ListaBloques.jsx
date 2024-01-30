@@ -17,6 +17,7 @@ import {
   Stack,
 } from "react-bootstrap";
 import { MdLooks3, MdLooksOne, MdLooksTwo, MdSave } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export default function ListaBloques() {
   const [eventBlocks, setEventBlocks] = useState([]);
@@ -57,12 +58,13 @@ export default function ListaBloques() {
   };
 
   const submitChange = () => {
-    axios.patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit)
-    .then((response) => {
-      setEventBlocks(response.data.data)
-      setModalEdit(false)
-    })
-  }
+    axios
+      .patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit)
+      .then((response) => {
+        setEventBlocks(response.data.data);
+        setModalEdit(false);
+      });
+  };
 
   return (
     <div>
@@ -199,6 +201,10 @@ export default function ListaBloques() {
           </div>
         </ModalBody>
       </Modal>
+      <h1 className="text-center">Acciones</h1>
+      <Button className="w-100" as={Link} to={"/staff/ticket"}>
+        Validar ticket
+      </Button>
       <h1 className="text-center">Bloques</h1>
       <Stack gap={3}>
         {eventBlocks.map((eb, i) => (

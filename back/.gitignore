@@ -15,6 +15,8 @@ node_modules
 .env
 .env.*
 
+*.csv
+
 # Editor directories and files
 .vscode/*
 .idea

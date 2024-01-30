@@ -10,6 +10,7 @@ import Attendance from "$/pages/staff/Attendance";
 import ListaBloques from "$/pages/staff/ListaBloques";
 import StaffLogin from "$/pages/staff/StaffLogin";
 import StaffRegister from "$/pages/staff/StaffRegister";
+import TicketValidation from "$/pages/staff/TicketValidation";
 
 const routes: RouteObject[] = [
   {
@@ -53,6 +54,10 @@ const routes: RouteObject[] = [
       {
         path: "attendance/:id",
         element: <Attendance />,
+      },
+      {
+        path: "ticket",
+        element: <TicketValidation />,
       },
       {
         path: "*",

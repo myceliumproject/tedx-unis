@@ -8,7 +8,11 @@ import QRCode from "qrcode";
 import { db } from "../db.js";
 import { emailSpecs, transporter } from "../email.js";
 import { handler } from "../middleware.js";
-import { authenticated, generateTicketToken } from "../token.js";
+import {
+  authenticated,
+  generateTicketToken,
+  verifyTicketToken,
+} from "../token.js";
 
 const router = Router();
 
@@ -299,6 +303,119 @@ router.get(
       .status(200)
       .contentType("image/png")
       .send(await QRCode.toBuffer(tokenUrl.toString()));
+  })
+);
+
+router.patch(
+  "/validate",
+  authenticated("staff"),
+  handler(async (req, res, next) => {
+    const { ticket } = req.query;
+
+    if (typeof ticket !== "string") {
+      next();
+      return;
+    }
+
+    const validatedTicket = verifyTicketToken(ticket);
+    if (validatedTicket === null) {
+      res.status(400).json({ error: "Ticket inválido." });
+      return;
+    }
+
+    const eventBlockRef = db
+      .collection("event_blocks")
+      .doc(validatedTicket.userBlock);
+    const eventBlockSnapshot = await eventBlockRef.get();
+
+    const eventBlockData = eventBlockSnapshot.data();
+    const takenSeatAssignments = eventBlockData.takenSeatAssignments;
+
+    const takenSeat = takenSeatAssignments.find(
+      (assignment) => assignment.userId === req.user.id
+    );
+    if (!takenSeat) {
+      res
+        .status(400)
+        .json({ error: "El usuario no está asignado. Ticket inválido." });
+      return;
+    }
+
+    res.status(200).json({
+      code: 0,
+      data: {
+        name: takenSeat.name,
+        eventBlock: {
+          datetime: eventBlockData.datetime,
+          events: eventBlockData.events,
+        },
+        seat: takenSeat.seat,
+        attended: takenSeat.attended,
+      },
+    });
+  })
+);
+
+router.patch(
+  "/confirm",
+  authenticated("staff"),
+  handler(async (req, res, next) => {
+    const { ticket } = req.query;
+
+    if (typeof ticket !== "string") {
+      next();
+      return;
+    }
+
+    const validatedTicket = verifyTicketToken(ticket);
+    if (validatedTicket === null) {
+      res.status(400).json({ error: "Ticket inválido." });
+      return;
+    }
+
+    const eventBlockRef = db
+      .collection("event_blocks")
+      .doc(validatedTicket.userBlock);
+    const eventBlockSnapshot = await eventBlockRef.get();
+
+    const eventBlockData = eventBlockSnapshot.data();
+    const takenSeatAssignments = eventBlockData.takenSeatAssignments;
+
+    const takenSeat = takenSeatAssignments.find(
+      (assignment) => assignment.userId === req.user.id
+    );
+    if (takenSeat === null) {
+      res
+        .status(400)
+        .json({ error: "El usuario no está asignado. Ticket inválido." });
+      return;
+    }
+
+    if (takenSeat.attended) {
+      res
+        .status(400)
+        .json({ error: `El usuario ${takenSeat.name} ya ingresó a la sala` });
+      return;
+    }
+
+    takenSeat.attended = true;
+
+    await eventBlockRef.update({
+      takenSeatAssignments,
+    });
+
+    res.status(200).json({
+      code: 0,
+      data: {
+        name: takenSeat.name,
+        eventBlock: {
+          datetime: eventBlockData.datetime,
+          events: eventBlockData.events,
+        },
+        seat: takenSeat.seat,
+        attended: true,
+      },
+    });
   })
 );
 
