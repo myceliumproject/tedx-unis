@@ -33,9 +33,12 @@ export default function Home() {
   useEffect(() => {
     if (mainInfo === null) return;
 
-    const interval = setInterval(() => {
+    const updateCountdown = () => {
       setCountdown(timeTo(new Date(mainInfo.starting_datetime)));
-    }, 1000);
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
 
     return () => {
       clearInterval(interval);
@@ -61,7 +64,7 @@ export default function Home() {
           ) : null}
         </Col>
       </Row>
-      <h1 className="text-center">Bloques</h1>
+      <h1 className="text-center mt-3">Bloques</h1>
       <Stack gap={3}>
         <Row className="gy-4">
           {eventBlocks.map((eb, i) => (

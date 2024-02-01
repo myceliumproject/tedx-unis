@@ -116,13 +116,13 @@ export default function Stage({
         }
       }
 
-      if (blockedRow > "K") {
-        return "K";
+      if (blockedRow > "L") {
+        return "L";
       } else {
         return blockedRow;
       }
     }
-    return "K";
+    return "L";
   }, [progressiveUnblock, taken]);
 
   return (

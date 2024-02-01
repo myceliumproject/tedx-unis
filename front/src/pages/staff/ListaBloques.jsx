@@ -36,17 +36,7 @@ export default function ListaBloques() {
   const handleChange = (campo, valor) => {
     let temp = { ...currentEdit };
 
-    if (campo === "fecha" || campo === "hora") {
-      let tempDate = temp.datetime.split("T");
-      if (campo === "fecha") {
-        tempDate[0] = valor;
-      } else if (campo === "hora") {
-        tempDate[1] = valor;
-      }
-      temp.datetime = tempDate.join("T");
-    } else {
-      temp[campo] = valor;
-    }
+    temp[campo] = valor;
 
     setCurrentEdit(temp);
   };
@@ -88,28 +78,57 @@ export default function ListaBloques() {
               onChange={(ev) => handleChange("img", ev.currentTarget.value)}
             />
           </FormGroup>
-          <br />
+          <FormGroup>
+            <FormLabel>Nombre</FormLabel>
+            <FormControl
+              type="text"
+              value={currentEdit.name}
+              onChange={(ev) => handleChange("name", ev.currentTarget.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Descripción</FormLabel>
+            <FormControl
+              as="textarea"
+              value={currentEdit.description}
+              onChange={(ev) =>
+                handleChange("description", ev.currentTarget.value)
+              }
+            />
+          </FormGroup>
           <Row>
-            <Col xs={12} md={6}>
+            <Col xs={12}>
               <FormGroup>
                 <FormLabel>Fecha</FormLabel>
                 <FormControl
                   type="date"
-                  value={currentEdit.datetime?.split("T")[0]}
+                  value={currentEdit.date}
                   onChange={(ev) =>
-                    handleChange("fecha", ev.currentTarget.value)
+                    handleChange("date", ev.currentTarget.value)
                   }
                 />
               </FormGroup>
             </Col>
             <Col xs={12} md={6}>
               <FormGroup>
-                <FormLabel>Hora</FormLabel>
+                <FormLabel>Hora Inicial</FormLabel>
                 <FormControl
                   type="time"
-                  value={currentEdit.datetime?.split("T")[1]}
+                  value={currentEdit.initial_time}
                   onChange={(ev) =>
-                    handleChange("hora", ev.currentTarget.value)
+                    handleChange("initial_time", ev.currentTarget.value)
+                  }
+                />
+              </FormGroup>
+            </Col>
+            <Col xs={12} md={6}>
+              <FormGroup>
+                <FormLabel>Hora Final</FormLabel>
+                <FormControl
+                  type="time"
+                  value={currentEdit.final_time}
+                  onChange={(ev) =>
+                    handleChange("final_time", ev.currentTarget.value)
                   }
                 />
               </FormGroup>

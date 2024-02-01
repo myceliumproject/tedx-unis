@@ -104,10 +104,7 @@ export default function TicketValidation() {
             <h1>Ticket</h1>
             <ul>
               <li>Titular: {validatedData.name}</li>
-              <li>
-                Evento:{" "}
-                {new Date(validatedData.eventBlock.datetime).toLocaleString()}
-              </li>
+              <li>Evento: {validatedData.eventBlock.name}</li>
               <li>Asiento: {validatedData.seat}</li>
             </ul>
             <Row className="g-1">

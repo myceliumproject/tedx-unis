@@ -48,10 +48,19 @@ export default function EventBlock({
           </Badge>
         ) : null}
         <Card.Body>
+          <Card.Title>{data?.name}</Card.Title>
           <Card.Subtitle>
-            {new Date(data?.datetime).toLocaleDateString()} -{" "}
-            {new Date(data?.datetime).toLocaleTimeString()}
+            {new Date(
+              data?.date + "T" + data?.initial_time
+            ).toLocaleDateString()}{" "}
+            -{" "}
+            {new Date(
+              data?.date + "T" + data?.initial_time
+            ).toLocaleTimeString()}{" "}
+            a{" "}
+            {new Date(data?.date + "T" + data?.final_time).toLocaleTimeString()}
           </Card.Subtitle>
+          {data?.description !== "" ? <p>{data?.description}</p> : null}
         </Card.Body>
         <Accordion
           alwaysOpen

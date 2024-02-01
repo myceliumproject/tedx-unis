@@ -69,8 +69,8 @@ function getBlockedRow(taken) {
     }
   }
 
-  if (blockedRow > "K") {
-    return "K";
+  if (blockedRow > "L") {
+    return "L";
   } else {
     return blockedRow;
   }
@@ -80,7 +80,11 @@ function getBlockedRow(taken) {
 router.post("/", async (req, res) => {
   try {
     const eventBlock = {
-      datetime: "",
+      name: "",
+      description: "",
+      date: "",
+      initial_time: "",
+      final_time: "",
       img: "", // URL
       events: [
         {
@@ -236,7 +240,7 @@ router.patch(
     );
 
     const blockDate = utcToZonedTime(
-      new Date(eventBlockData.datetime),
+      new Date(eventBlockData.date + "T" + eventBlockData.initial_time),
       "America/Guatemala"
     );
 
@@ -346,7 +350,9 @@ router.patch(
       data: {
         name: takenSeat.name,
         eventBlock: {
-          datetime: eventBlockData.datetime,
+          date: eventBlockData.date,
+          initial_time: eventBlockData.initial_time,
+          final_time: eventBlockData.final_time,
           events: eventBlockData.events,
         },
         seat: takenSeat.seat,
@@ -409,7 +415,9 @@ router.patch(
       data: {
         name: takenSeat.name,
         eventBlock: {
-          datetime: eventBlockData.datetime,
+          date: eventBlockData.date,
+          initial_time: eventBlockData.initial_time,
+          final_time: eventBlockData.final_time,
           events: eventBlockData.events,
         },
         seat: takenSeat.seat,

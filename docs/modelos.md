@@ -3,7 +3,11 @@
 ```typescript
 type EventBlock = {
   id: string;
-  datetime: string | number; // ISO string or Unix timestamp (seconds)
+  name: string;
+  description: string;
+  date: string; // ISO string
+  initial_time: string; // ISO string
+  final_time: string; // ISO string
   img: string; // URL
   events: {
     name: string;
