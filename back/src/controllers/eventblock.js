@@ -245,13 +245,13 @@ router.patch(
       "Ticket de Ingreso TedxUnis",
       `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${
         process.env.PUBLIC_SITE_URL
-      }/tedxblack.svg"/><h1 style="color: #ae0036">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
+      }/tedxblack.png"/><h1 style="color: #ae0036">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
         blockDate,
         "dd/MM/yyyy, hh:mm aa",
         { locale: es }
       )}. Tu asiento es el <b>${seat}</b></p><img style="width: 30rem" src="${qrcodeImgUrl.toString()}"/><p>Debes mostrar el código QR para ingresar, tenlo a la mano cuando te dirijas al ingreso.</p><p style="font-size: 0.8rem; color: gray">Powered by: Mycelium <img style="width: 1rem" src="${
         process.env.PUBLIC_SITE_URL
-      }/mycelium.svg"/></p></div>`
+      }/mycelium.png"/></p></div>`
     );
 
     await new Promise((resolve, reject) => {
