@@ -7,6 +7,7 @@ import morgan from "morgan";
 import { Server } from "socket.io";
 import adminRouter from "./controllers/admins.js";
 import eventBlockRouter from "./controllers/eventblock.js";
+import infoRouter from "./controllers/info.js";
 import userRouter from "./controllers/user.js";
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(
 app.use("/user", userRouter);
 app.use("/eventblock", eventBlockRouter);
 app.use("/admin", adminRouter);
+app.use("/info", infoRouter);
 
 io.on("connection", (socket) => {
   console.log("socket connected");
