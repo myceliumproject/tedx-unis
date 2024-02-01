@@ -1,10 +1,16 @@
 // @ts-check
 import { useState } from "react";
-import { Accordion, Badge, Button, Card, Col, Modal, ModalHeader, Row } from "react-bootstrap";
+import { Accordion, Badge, Button, Card, Col, Row } from "react-bootstrap";
 import { MdCheck, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-export default function EventBlock({ page = null, seat = null, data, setModalEdit, setCurrentEdit }) {
+export default function EventBlock({
+  page = null,
+  seat = null,
+  data,
+  setModalEdit = null,
+  setCurrentEdit = null,
+}) {
   const [hover, setHover] = useState(false);
 
   return (
@@ -20,8 +26,8 @@ export default function EventBlock({ page = null, seat = null, data, setModalEdi
             variant="primary"
             style={{ position: "absolute", top: "10px", right: "10px" }}
             onClick={() => {
-              setCurrentEdit(data)
-              setModalEdit(true)
+              setCurrentEdit(data);
+              setModalEdit(true);
             }}
           >
             <MdEdit /> Editar
