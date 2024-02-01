@@ -30,6 +30,16 @@ export default function MainLayout() {
                   Staff
                 </Nav.Link>
               ) : null}
+              {user !== null ? (
+                <Nav.Link
+                  onClick={() => {
+                    localStorage.clear();
+                    setTimeout(() => (window.location.href = "/"), 100);
+                  }}
+                >
+                  Cerrar sesión
+                </Nav.Link>
+              ) : null}
             </Nav>
             <Navbar.Text>
               Powered by:{" "}
