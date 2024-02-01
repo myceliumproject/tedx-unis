@@ -36,6 +36,12 @@ export function verifyUserToken(token) {
   }
 }
 
+/**
+ *
+ * @param {"user" | "staff" | "admin"} userType
+ * @param {boolean} getUser
+ * @returns
+ */
 export function authenticated(userType, getUser = true) {
   return handler(async (req, res, next) => {
     /** @type {string} */
