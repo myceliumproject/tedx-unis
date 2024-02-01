@@ -57,13 +57,13 @@ function getBlockedRow(taken) {
   let blockedRow;
   if (takenSeats / totalSeats < 0.6) {
     if (lastReservedRow <= "C") {
-      blockedRow = "D";
+      blockedRow = "G";
     } else {
       blockedRow = String.fromCharCode(lastReservedRow.charCodeAt(0) + 1);
     }
   } else {
     if (lastReservedRow <= "C") {
-      blockedRow = "E";
+      blockedRow = "H";
     } else {
       blockedRow = String.fromCharCode(lastReservedRow.charCodeAt(0) + 2);
     }

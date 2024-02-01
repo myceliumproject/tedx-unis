@@ -25,7 +25,7 @@ export default function MainLayout() {
                 <Nav.Link as={Link} to="/auth">
                   Inicio de sesión
                 </Nav.Link>
-              ) : user.userType === "staff" ? (
+              ) : user.userType === "staff" || user.userType === "admin" ? (
                 <Nav.Link as={Link} to="/staff">
                   Staff
                 </Nav.Link>

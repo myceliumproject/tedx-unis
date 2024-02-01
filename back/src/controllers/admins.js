@@ -14,7 +14,13 @@ router.patch(
   async (req, res) => {
     try {
       const id = req.params.id_block;
-      const data = req.body;
+      const {
+        takenSeatAssignments: _takenSeatAssignments,
+        takenSeats: _takenSeats,
+        waitlist: _waitlist,
+        id: _id,
+        ...data
+      } = req.body;
 
       await db.collection("event_blocks").doc(id).update(data);
 

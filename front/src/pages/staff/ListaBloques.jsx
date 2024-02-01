@@ -1,5 +1,6 @@
 import { urlApi } from "$/environment";
 import EventBlock from "$/lib/components/EventBlock";
+import Stage from "$/lib/components/Stage";
 import { useUser } from "$/lib/hooks/user";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
@@ -217,6 +218,23 @@ export default function ListaBloques() {
             ))}
           </Row>
           <br />
+          <Stage
+            canSelectTaken
+            selected={null}
+            onSelect={(seat) => {
+              const tempBlockedSeats = [...currentEdit.blockedSeats];
+              if (!tempBlockedSeats.includes(seat)) {
+                tempBlockedSeats.push(seat);
+              } else {
+                tempBlockedSeats.splice(tempBlockedSeats.indexOf(seat), 1);
+              }
+              setCurrentEdit({
+                ...currentEdit,
+                blockedSeats: tempBlockedSeats,
+              });
+            }}
+            taken={currentEdit.blockedSeats}
+          />
           <div style={{ display: "flex", justifyContent: "end" }}>
             <Button variant="primary" onClick={submitChange}>
               <MdSave /> Guardar

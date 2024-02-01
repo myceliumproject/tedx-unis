@@ -30,10 +30,15 @@ function Spacer({ seats }) {
   );
 }
 
+/**
+ *
+ * @param {{ seat: string; onSelect: (seat: string) => void; color?: "white" | "gold" | "gray"; disabled?: boolean; readOnly?: boolean }} props
+ * @returns
+ */
 function Seat({
   seat,
   onSelect,
-  selected = false,
+  color = "white",
   disabled = false,
   readOnly = false,
 }) {
@@ -63,7 +68,9 @@ function Seat({
           width="100%"
           height="100%"
           stroke="black"
-          fill={selected ? "#CC9865" : disabled ? "gray" : "white"}
+          fill={
+            color === "gold" ? "#CC9865" : color === "gray" ? "gray" : "white"
+          }
         />
       </div>
     </OverlayTrigger>
@@ -76,6 +83,7 @@ export default function Stage({
   progressiveUnblock = false,
   onSelect = undefined,
   readOnly = false,
+  canSelectTaken = false,
 }) {
   const blockedFromRow = useMemo(() => {
     if (progressiveUnblock) {
@@ -104,13 +112,13 @@ export default function Stage({
       let blockedRow;
       if (takenSeats / totalSeats < 0.6) {
         if (lastReservedRow <= "C") {
-          blockedRow = "D";
+          blockedRow = "G";
         } else {
           blockedRow = String.fromCharCode(lastReservedRow.charCodeAt(0) + 1);
         }
       } else {
         if (lastReservedRow <= "C") {
-          blockedRow = "E";
+          blockedRow = "H";
         } else {
           blockedRow = String.fromCharCode(lastReservedRow.charCodeAt(0) + 2);
         }
@@ -154,9 +162,18 @@ export default function Stage({
                 <Seat
                   key={c}
                   seat={c}
-                  selected={c === selected}
+                  color={
+                    c === selected
+                      ? "gold"
+                      : taken.includes(c) || c >= blockedFromRow
+                      ? "gray"
+                      : "white"
+                  }
                   onSelect={onSelect}
-                  disabled={taken.includes(c) || c >= blockedFromRow}
+                  disabled={
+                    !canSelectTaken &&
+                    (taken.includes(c) || c >= blockedFromRow)
+                  }
                   readOnly={readOnly}
                 />
               ))}
@@ -171,9 +188,18 @@ export default function Stage({
                 <Seat
                   key={c}
                   seat={c}
-                  selected={c === selected}
+                  color={
+                    c === selected
+                      ? "gold"
+                      : taken.includes(c) || c >= blockedFromRow
+                      ? "gray"
+                      : "white"
+                  }
                   onSelect={onSelect}
-                  disabled={taken.includes(c) || c >= blockedFromRow}
+                  disabled={
+                    !canSelectTaken &&
+                    (taken.includes(c) || c >= blockedFromRow)
+                  }
                   readOnly={readOnly}
                 />
               ))}
@@ -190,9 +216,18 @@ export default function Stage({
                 <Seat
                   key={c}
                   seat={c}
-                  selected={c === selected}
+                  color={
+                    c === selected
+                      ? "gold"
+                      : taken.includes(c) || c >= blockedFromRow
+                      ? "gray"
+                      : "white"
+                  }
                   onSelect={onSelect}
-                  disabled={taken.includes(c) || c >= blockedFromRow}
+                  disabled={
+                    !canSelectTaken &&
+                    (taken.includes(c) || c >= blockedFromRow)
+                  }
                   readOnly={readOnly}
                 />
               ))}
