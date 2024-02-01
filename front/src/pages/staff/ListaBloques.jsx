@@ -1,5 +1,6 @@
 import { urlApi } from "$/environment";
 import EventBlock from "$/lib/components/EventBlock";
+import { useUser } from "$/lib/hooks/user";
 import axios from "axios";
 import { useLayoutEffect, useState } from "react";
 import {
@@ -23,6 +24,7 @@ export default function ListaBloques() {
   const [eventBlocks, setEventBlocks] = useState([]);
   const [modalEdit, setModalEdit] = useState(false);
   const [currentEdit, setCurrentEdit] = useState({});
+  const [user] = useUser();
 
   useLayoutEffect(() => {
     axios.get(urlApi + `/eventblock/list`).then((res) => {
@@ -49,7 +51,9 @@ export default function ListaBloques() {
 
   const submitChange = () => {
     axios
-      .patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit)
+      .patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit, {
+        headers: { "X-Access-Token": user.token },
+      })
       .then((response) => {
         setEventBlocks(response.data.data);
         setModalEdit(false);
