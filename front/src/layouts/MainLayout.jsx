@@ -55,6 +55,15 @@ export default function MainLayout() {
           <Outlet />
         </ErrorBoundary>
       </Container>
+      <div
+        className="bg-dark text-white pt-3 d-flex flex-column align-items-center gap-3"
+        style={{ paddingBottom: "10rem" }}
+      >
+        <span>Powered by Facultad de Ingenieria (FING), ISCC. 2024</span>
+        <a href="https://unis.edu.gt/">
+          <img src="https://unis.edu.gt/wp-content/uploads/2021/08/logo.svg" />
+        </a>
+      </div>
     </ErrorBoundary>
   );
 }
