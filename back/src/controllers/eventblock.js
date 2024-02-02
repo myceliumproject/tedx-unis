@@ -240,7 +240,9 @@ router.patch(
     );
 
     const blockDate = utcToZonedTime(
-      new Date(eventBlockData.date + "T" + eventBlockData.initial_time),
+      new Date(
+        eventBlockData.date + "T" + eventBlockData.initial_time + "-06:00"
+      ),
       "America/Guatemala"
     );
 
