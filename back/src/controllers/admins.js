@@ -60,7 +60,6 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
         userIds.length > 0
           ? await db
               .collection("user")
-              .where(FieldPath.documentId(), "in", userIds)
               .get()
           : { docs: [] };
       const emailsById = {};
