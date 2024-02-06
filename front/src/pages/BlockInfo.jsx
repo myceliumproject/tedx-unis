@@ -94,9 +94,8 @@ export default function BlockInfo() {
                     <Stage
                       readOnly
                       selected={userTicket.seat}
-                      taken={eventBlock.takenSeats.concat(
-                        eventBlock.blockedSeats
-                      )}
+                      taken={eventBlock.takenSeats}
+                      extraBlocked={eventBlock.blockedSeats}
                     />
                   </Card.Body>
                 </>
@@ -106,9 +105,8 @@ export default function BlockInfo() {
                     progressiveUnblock
                     selected={selectedSeat}
                     onSelect={setSelectedSeat}
-                    taken={eventBlock.takenSeats.concat(
-                      eventBlock.blockedSeats
-                    )}
+                    taken={eventBlock.takenSeats}
+                    extraBlocked={eventBlock.blockedSeats}
                   />
                   <Card.Body>
                     <Button
