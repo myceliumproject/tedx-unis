@@ -8,8 +8,6 @@ import NotFound from "./NotFound";
 import Creditos from "$/pages/Credits";
 import Attendance from "$/pages/staff/Attendance";
 import ListaBloques from "$/pages/staff/ListaBloques";
-import StaffLogin from "$/pages/staff/StaffLogin";
-import StaffRegister from "$/pages/staff/StaffRegister";
 import TicketValidation from "$/pages/staff/TicketValidation";
 import Users from "$/pages/staff/Users";
 
@@ -47,11 +45,6 @@ const routes: RouteObject[] = [
         path: "",
         element: <ListaBloques />,
       },
-      {
-        path: "register",
-        element: <StaffRegister />,
-      },
-      { path: "login", element: <StaffLogin /> },
       {
         path: "attendance/:id",
         element: <Attendance />,
