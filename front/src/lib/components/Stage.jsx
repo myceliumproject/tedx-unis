@@ -32,7 +32,7 @@ function Spacer({ seats }) {
 
 /**
  *
- * @param {{ seat: string; onSelect: (seat: string) => void; color?: "black" | "white" | "gold" | "gray" | "darkgray"; disabled?: boolean; readOnly?: boolean }} props
+ * @param {{ seat: string; onSelect: (seat: string) => void; color?: "black" | "white" | "gold" | "gray" | "darkgray" | "blue"; disabled?: boolean; readOnly?: boolean }} props
  * @returns
  */
 function Seat({
@@ -77,6 +77,8 @@ function Seat({
               ? "#1f1f1f"
               : color === "darkgray"
               ? "#3f3f3f"
+              : color === "blue"
+              ? "skyblue"
               : "white"
           }
         />
@@ -89,6 +91,7 @@ export default function Stage({
   selected,
   taken,
   extraBlocked,
+  special = [],
   progressiveUnblock = false,
   onSelect = undefined,
   readOnly = false,
@@ -174,6 +177,8 @@ export default function Stage({
                   color={
                     c === selected
                       ? "gold"
+                      : special.includes(c)
+                      ? "blue"
                       : taken.includes(c)
                       ? "gray"
                       : extraBlocked.includes(c)
@@ -206,6 +211,8 @@ export default function Stage({
                   color={
                     c === selected
                       ? "gold"
+                      : special.includes(c)
+                      ? "blue"
                       : taken.includes(c)
                       ? "gray"
                       : extraBlocked.includes(c)
@@ -240,6 +247,8 @@ export default function Stage({
                   color={
                     c === selected
                       ? "gold"
+                      : special.includes(c)
+                      ? "blue"
                       : taken.includes(c)
                       ? "gray"
                       : extraBlocked.includes(c)

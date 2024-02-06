@@ -1,5 +1,6 @@
 import { urlApi } from "$/environment";
 import EventBlock from "$/lib/components/EventBlock";
+import Stage from "$/lib/components/Stage";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
@@ -49,6 +50,17 @@ export default function Attendance() {
         placeholder="Buscar Asistencia"
         onChange={(e) => setSearch(e.target.value)}
       />
+      {eventBlock !== null ? (
+        <Stage
+          progressiveUnblock
+          readOnly
+          taken={eventBlock.takenSeats}
+          extraBlocked={eventBlock.blockedSeats}
+          special={attendedFilteredUsers
+            .filter((e) => e.attended)
+            .map((e) => e.seat)}
+        />
+      ) : null}
       <Table>
         <thead>
           <tr>
