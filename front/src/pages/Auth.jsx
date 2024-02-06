@@ -13,7 +13,6 @@ export default function Auth() {
   const [searchParams] = useSearchParams();
 
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [authRequested, setAuthRequested] = useState(false);
@@ -38,18 +37,14 @@ export default function Auth() {
     setLoading(false);
   });
 
-  const changeName = useEvent(async () => {
-    setLoading(true);
-    const res = await axios.post(urlApi + `/user/changename`, { name });
-    if (res.data.code === 0) {
-      setUser({ ...user, name });
-    }
-    setLoading(false);
-  });
-
   useEffect(() => {
-    if (user !== null && user.name !== "")
-      navigate(searchParams.get("return") ?? "/");
+    if (user !== null) {
+      if (user.name === "") {
+        navigate("/changename?" + searchParams.toString());
+      } else {
+        navigate(searchParams.get("return") ?? "/");
+      }
+    }
   }, [navigate, searchParams, user]);
 
   return (
@@ -58,24 +53,6 @@ export default function Auth() {
         <h1 className="text-center">Iniciar Sesión</h1>
         {loading ? (
           <Spinner />
-        ) : user && user.name === "" ? (
-          <Form onSubmit={wrapSubmit(changeName)}>
-            <p>¿Cuál es tu nombre?</p>
-            <FloatingLabel controlId="code" label="Nombre" className="mb-3">
-              <Form.Control
-                required
-                placeholder="Nombre"
-                value={name}
-                onChange={(e) => setName(e.currentTarget.value)}
-              />
-            </FloatingLabel>
-            <Button
-              type="submit"
-              className="align-self-center rounded text-white"
-            >
-              Ingresar
-            </Button>
-          </Form>
         ) : !authRequested ? (
           <form onSubmit={wrapSubmit(sendAuthRequest)}>
             <div className="form-floating mb-3">

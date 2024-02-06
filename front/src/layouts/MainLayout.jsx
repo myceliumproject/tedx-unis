@@ -22,6 +22,11 @@ export default function MainLayout() {
                 <Nav.Link as={Link} to="/">
                   Bloques
                 </Nav.Link>
+                {user !== null ? (
+                  <Nav.Link as={Link} to="/changename">
+                    Cambiar nombre
+                  </Nav.Link>
+                ) : null}
                 {user === null ? (
                   <Nav.Link as={Link} to="/auth">
                     Inicio de sesión
