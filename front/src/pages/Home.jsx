@@ -32,6 +32,11 @@ export default function Home() {
 
   useEffect(() => {
     if (mainInfo === null) return;
+    if (
+      Date.now() >
+      new Date(mainInfo.starting_datetime + mainInfo.timezone).getTime()
+    )
+      return;
 
     const updateCountdown = () => {
       setCountdown(timeTo(new Date(mainInfo.starting_datetime)));
@@ -54,12 +59,21 @@ export default function Home() {
         <Col xs={12} sm={4}>
           {mainInfo !== null ? (
             <div className="d-flex align-items-center justify-content-center flex-column h-100">
-              <div className="fs-3">
-                {new Date(
-                  mainInfo.starting_datetime + mainInfo.timezone
-                ).toDateString()}
-              </div>
-              <div className="fs-1 fw-bold">{countdown}</div>
+              {Date.now() <=
+              new Date(
+                mainInfo.starting_datetime + mainInfo.timezone
+              ).getTime() ? (
+                <>
+                  <div className="fs-3">
+                    {new Date(
+                      mainInfo.starting_datetime + mainInfo.timezone
+                    ).toDateString()}
+                  </div>
+                  <div className="fs-1 fw-bold">{countdown}</div>
+                </>
+              ) : (
+                <div className="fs-1 fw-bold">¡Ha comenzado!</div>
+              )}
             </div>
           ) : null}
         </Col>
