@@ -11,6 +11,7 @@ import ListaBloques from "$/pages/staff/ListaBloques";
 import StaffLogin from "$/pages/staff/StaffLogin";
 import StaffRegister from "$/pages/staff/StaffRegister";
 import TicketValidation from "$/pages/staff/TicketValidation";
+import Users from "$/pages/staff/Users";
 
 const routes: RouteObject[] = [
   {
@@ -58,6 +59,10 @@ const routes: RouteObject[] = [
       {
         path: "ticket",
         element: <TicketValidation />,
+      },
+      {
+        path: "users",
+        element: <Users />,
       },
       {
         path: "*",

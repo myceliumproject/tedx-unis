@@ -96,19 +96,23 @@ router.post(
 );
 
 router.post("/changetype", authenticated("admin", false), async (req, res) => {
-  const { email, type } = req.body;
+  const { userId, type } = req.body;
 
-  const foundUsers = await db
-    .collection("user")
-    .where("email", "==", email)
-    .get();
+  const foundUserRef = await db.collection("user").doc(userId);
 
-  if (foundUsers.docs.length === 0)
-    return res.json({ code: 1, message: "Unknown user", data: null });
-  const foundUserSs = foundUsers.docs[0];
-
-  foundUserSs.ref.update({
+  foundUserRef.update({
     userType: type,
+  });
+
+  res.json({ code: 0, data: null });
+});
+
+router.get("/list", authenticated("staff", false), async (req, res) => {
+  const foundUsers = await db.collection("user").get();
+
+  res.json({
+    code: 0,
+    data: foundUsers.docs.map((d) => ({ ...d.data(), id: d.id })),
   });
 });
 

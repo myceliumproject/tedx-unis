@@ -21,6 +21,14 @@ const { Provider: RawUserProvider, useContext: useUser } =
     }[];
   } | null>("user", (user) => user);
 
+try {
+  axios.defaults.headers.common["X-Access-Token"] = JSON.parse(
+    localStorage.getItem("user")
+  )?.token;
+} catch {
+  // ignore
+}
+
 function EffectsHandler({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useUser();
 
