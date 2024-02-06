@@ -27,13 +27,7 @@ export default function TicketValidation() {
 
   const confirmTicket = useEvent(() => {
     axios
-      .patch(
-        urlApi + `/eventblock/confirm?ticket=${scannedData.ticket}`,
-        null,
-        {
-          headers: { "X-Access-Token": user?.token },
-        }
-      )
+      .patch(urlApi + `/eventblock/confirm?ticket=${scannedData.ticket}`, null)
       .then((res) => {
         setValidatedData(res.data.data);
       })
@@ -43,13 +37,7 @@ export default function TicketValidation() {
   useEffect(() => {
     if (scannedData === null) return;
     axios
-      .patch(
-        urlApi + `/eventblock/validate?ticket=${scannedData.ticket}`,
-        null,
-        {
-          headers: { "X-Access-Token": user?.token },
-        }
-      )
+      .patch(urlApi + `/eventblock/validate?ticket=${scannedData.ticket}`, null)
       .then((res) => {
         setValidatedData(res.data.data);
       })

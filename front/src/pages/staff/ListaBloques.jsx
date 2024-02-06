@@ -52,9 +52,7 @@ export default function ListaBloques() {
 
   const submitChange = () => {
     axios
-      .patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit, {
-        headers: { "X-Access-Token": user.token },
-      })
+      .patch(urlApi + `/admin/update/block/${currentEdit.id}`, currentEdit)
       .then((response) => {
         setEventBlocks(response.data.data);
         setModalEdit(false);

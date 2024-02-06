@@ -46,9 +46,7 @@ export default function BlockInfo() {
       name: user.name,
     };
     axios
-      .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post, {
-        headers: { "X-Access-Token": user.token },
-      })
+      .patch(urlApi + `/eventblock/reserve/${eventBlockId}`, post)
       .then((res) => {
         if (res.data.code === 0) {
           const tickets = [...user.tickets];

@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useLayoutEffect } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 import { createLocalStorageContext } from "./localStorage";
 
 const { Provider: RawUserProvider, useContext: useUser } =
@@ -23,7 +24,7 @@ const { Provider: RawUserProvider, useContext: useUser } =
 function EffectsHandler({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useUser();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (
       (user?.tokenExp ?? null) !== null &&
       Date.now() / 1000 > user.tokenExp
@@ -31,6 +32,10 @@ function EffectsHandler({ children }: { children: React.ReactNode }) {
       setUser(null);
     }
   }, [setUser, user?.tokenExp]);
+
+  useEffect(() => {
+    axios.defaults.headers.common["X-Access-Token"] = user?.token;
+  }, [user?.token]);
 
   return children;
 }
