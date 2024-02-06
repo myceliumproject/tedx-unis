@@ -21,7 +21,6 @@ router.post("/authrequest", (req, res) => {
   const email = req.body.email;
 
   emailCodes[email] = {
-    name: req.body.name,
     code: randomCode(),
   };
 
@@ -69,7 +68,7 @@ router.post(
     } else {
       const userRef = await db.collection("user").add({
         email: email,
-        name: savedCode.name,
+        name: "",
         tickets: [],
         waitlist: [],
         userType: "user",
@@ -95,10 +94,20 @@ router.post(
   })
 );
 
+router.post("/changename", authenticated("user"), async (req, res) => {
+  const foundUserRef = db.collection("user").doc(req.user.id);
+
+  foundUserRef.update({
+    name: req.body.name,
+  });
+
+  res.json({ code: 0, data: null });
+});
+
 router.post("/changetype", authenticated("admin", false), async (req, res) => {
   const { userId, type } = req.body;
 
-  const foundUserRef = await db.collection("user").doc(userId);
+  const foundUserRef = db.collection("user").doc(userId);
 
   foundUserRef.update({
     userType: type,
