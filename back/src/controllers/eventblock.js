@@ -338,7 +338,7 @@ router.patch(
     const takenSeatAssignments = eventBlockData.takenSeatAssignments;
 
     const takenSeat = takenSeatAssignments.find(
-      (assignment) => assignment.userId === req.user.id
+      (assignment) => assignment.userId === validatedTicket.sub
     );
     if (!takenSeat) {
       res
@@ -390,7 +390,7 @@ router.patch(
     const takenSeatAssignments = eventBlockData.takenSeatAssignments;
 
     const takenSeat = takenSeatAssignments.find(
-      (assignment) => assignment.userId === req.user.id
+      (assignment) => assignment.userId === validatedTicket.sub
     );
     if (takenSeat === null) {
       res
