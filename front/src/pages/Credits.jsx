@@ -12,7 +12,7 @@ export default function Creditos() {
             name="Juan Rafael Berganza Campos"
             linkedin="https://www.linkedin.com/in/juan-berganza-17b23b288/"
             instagram="https://www.instagram.com/jrberganza/"
-            song="https://open.spotify.com/embed/track/5KE5Inz4uZKGb2EzETaOEe"
+            song="https://open.spotify.com/embed/track/5Teihsj5GGSvEKCEcJANV7"
           />
         </Col>
         <Col lg={4}>
@@ -21,7 +21,7 @@ export default function Creditos() {
             name="Luis Enrique Menéndez Figueroa"
             linkedin="https://www.linkedin.com/in/luis-enrique-menendez-figueroa-6953a925b/"
             instagram="https://www.instagram.com/wuiquique"
-            song="https://open.spotify.com/embed/track/5w9upngVRHNjdZcRC7Xxr2?utm_source=generator"
+            song="https://open.spotify.com/embed/track/5QOBT97OmYCZo1W5u7tRrB?utm_source=generator"
           />
         </Col>
         <Col lg={4}>
