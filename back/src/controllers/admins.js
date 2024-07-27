@@ -1,7 +1,10 @@
 // @ts-check
+import unoconv from "better-unoconv";
+import Docxtemplater from "docxtemplater";
 import { Router } from "express";
-import { FieldPath } from "firebase-admin/firestore";
 import * as fs from "fs";
+import PizZip from "pizzip";
+import { tmpNameSync } from "tmp";
 import { db } from "../db.js";
 import { sendEmail } from "../email.js";
 import { authenticated } from "../token.js";
@@ -57,11 +60,7 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
 
       const userIds = sorted.map((seat) => seat.userId);
       const userSnapshots =
-        userIds.length > 0
-          ? await db
-              .collection("user")
-              .get()
-          : { docs: [] };
+        userIds.length > 0 ? await db.collection("user").get() : { docs: [] };
       const emailsById = {};
       for (const userSnapshot of userSnapshots.docs) {
         emailsById[userSnapshot.id] = userSnapshot.data().email;
@@ -86,12 +85,12 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
 
     sendEmail(
       email,
-      "Reportes de Asistencia TEDxUNIS",
+      "Reportes de Asistencia IntegraRSE",
       `
         <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
-        <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/tedxblack.png"/>
-          <h3 style="color: #ae0036">
-            Reporte de Asistencia TEDxUNIS
+        <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/>
+          <h3 style="color: #006400">
+            Reporte de Asistencia IntegraRSE
           </h3>
         </div>
         `,
@@ -99,6 +98,71 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
     );
 
     res.status(200).json({ code: 0, data: "Email Sent" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error 500" });
+  }
+});
+
+router.get("/cert/:block", authenticated("admin"), async (req, res) => {
+  try {
+    const { block } = req.params;
+    const db_block = (
+      await db.collection("event_blocks").doc(block).get()
+    ).data();
+    let filtered = db_block.takenSeatAssignments.filter((e) => e.attended);
+
+    const tempate = fs.readFileSync("./Document1.docx", "binary");
+    const zip = new PizZip(tempate);
+    const doc = new Docxtemplater(zip, {
+      linebreaks: true,
+    });
+
+    for (const u of filtered) {
+      const userData = (await db.collection("user").doc(u.userId).get()).data();
+      doc.render({
+        username: userData.name,
+      });
+
+      const buf = doc.getZip().generate({
+        type: "nodebuffer",
+        compression: "DEFLATE",
+      });
+
+      const docx_result = tmpNameSync({ postfix: ".docx" });
+      const pdf_result = tmpNameSync({ postfix: ".pdf" });
+      fs.writeFileSync(docx_result, buf);
+
+      await new Promise((resolve, reject) =>
+        unoconv.convert(docx_result, "pdf", {}, function (err, res) {
+          if (err) reject(err);
+          fs.writeFileSync(pdf_result, res);
+          resolve();
+        })
+      );
+
+      await sendEmail(
+        userData.email,
+        "Certificado de Asistencia Foro IntegraRSE",
+        `
+          <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
+          <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/>
+            <h3 style="color: #006400">
+              Certificado de Asistencia IntegraRSE: Estrategias integrales y sostenibles para la Responsabilidad Empresarial
+            </h3>
+          </div>
+          `,
+        [
+          {
+            filename: pdf_result,
+            path: pdf_result,
+            contentType: "applicaation/pdf",
+          },
+        ]
+      );
+    }
+
+    res.json({ code: 0, data: "Success" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error 500" });

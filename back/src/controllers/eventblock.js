@@ -248,10 +248,10 @@ router.patch(
 
     let mailSpecs = emailSpecs(
       req.user.email,
-      "Ticket de Ingreso TedxUnis",
+      "Ticket de Ingreso IntegraRSE",
       `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${
         process.env.PUBLIC_SITE_URL
-      }/tedxblack.png"/><h1 style="color: #ae0036">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
+      }/integrarse-black.png"/><h1 style="color: #006400">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
         blockDate,
         "dd/MM/yyyy, hh:mm aa",
         { locale: es }
