@@ -95,7 +95,7 @@ export default function MainLayout() {
               </h4>
             </div>
           </div>
-          <h5 style={{ color: "#bababa" }}>Patrocinadores</h5>
+          <h5 style={{ color: "#bababa" }}>Con el patrocinio de</h5>
           <div
             style={{
               display: "flex",
@@ -134,7 +134,9 @@ export default function MainLayout() {
               style={{ height: "110px", objectFit: "contain" }}
             />
           </div>
-          <h5 style={{ color: "#bababa" }}>Apoyo</h5>
+          <h5 style={{ color: "#bababa", marginTop: "20px" }}>
+            Con el apoyo de
+          </h5>
           <div
             style={{
               display: "flex",
