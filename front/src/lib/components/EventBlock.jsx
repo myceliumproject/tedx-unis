@@ -85,12 +85,17 @@ export default function EventBlock({
             </Accordion.Item>
           ))}
         </Accordion>
-        {page !== null ? (
+
+        {page !== null && data?.events.length !== 0 ? (
           <Card.Body>
             {page === "home" ? (
-              <Link to={`/block/${data?.id}`} className="btn btn-primary">
-                {seat !== null ? "Ver ticket" : "Conseguir asiento"}
-              </Link>
+              seat === null &&
+              data?.blockedSeats?.length + data?.takenSeats?.length >=
+                232 ? null : (
+                <Link to={`/block/${data?.id}`} className="btn btn-primary">
+                  {seat !== null ? "Ver ticket" : "Conseguir asiento"}
+                </Link>
+              )
             ) : page === "staff" ? (
               <Link
                 to={`/staff/attendance/${data?.id}`}

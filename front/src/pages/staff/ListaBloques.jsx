@@ -262,7 +262,7 @@ export default function ListaBloques() {
           </Button>
         ) : null}
       </div>
-      <h1 className="text-center">Bloques</h1>
+      <h1 className="text-center">Foro</h1>
       <Stack gap={3}>
         {eventBlocks.map((eb, i) => (
           <EventBlock

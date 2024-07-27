@@ -1,8 +1,7 @@
-import Logo from "$/lib/components/Logo";
-import TEDxLogo from "$/lib/components/TEDxLogo";
+import IntegraRSELogo from "$/lib/components/IntegraRSELogo";
 import { useUser } from "$/lib/hooks/user";
 import ErrorBoundary from "$/routes/ErrorBoundary";
-import { Container, Nav, Navbar, Stack } from "react-bootstrap";
+import { Badge, Container, Nav, Navbar, Stack } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 
 export default function MainLayout() {
@@ -14,7 +13,7 @@ export default function MainLayout() {
         <Navbar expand="lg" bg="primary" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/">
-              <TEDxLogo />
+              <IntegraRSELogo />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -47,12 +46,6 @@ export default function MainLayout() {
                   </Nav.Link>
                 ) : null}
               </Nav>
-              <Navbar.Text>
-                Powered by:{" "}
-                <Link to="/by">
-                  <Logo /> Mycelium
-                </Link>
-              </Navbar.Text>
             </Navbar.Collapse>
           </Container>
         </Navbar>
@@ -62,13 +55,106 @@ export default function MainLayout() {
           </ErrorBoundary>
         </Container>
         <div
-          className="bg-dark text-white pt-3 d-flex flex-column align-items-center gap-3 flex-grow-1"
-          style={{ paddingBottom: "10rem" }}
+          className="bg-dark  text-white pt-3 d-flex flex-column align-items-center gap-3 flex-grow-1"
+          style={{ paddingBottom: "60px" }}
         >
-          <span>Powered by Facultad de Ingenieria (FING), ISCC. 2024</span>
-          <a href="https://unis.edu.gt/">
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <img
+              src="/mycelium.svg"
+              style={{ height: "150px", objectFit: "conatain" }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginLeft: "40px",
+                justifyContent: "center",
+              }}
+            >
+              <h2 style={{ color: "#bababa" }}>
+                Powered by:{" "}
+                <Link className="text-white" to="/by">
+                  Mycelium
+                </Link>
+              </h2>
+              <h4>
+                <Badge pill>
+                  <span>Facultad de Ingenieria (FING), ISCC. 2024</span>
+                </Badge>
+              </h4>
+            </div>
+          </div>
+          <h5 style={{ color: "#bababa" }}>Patrocinadores</h5>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "white",
+              paddingInline: "40px",
+              paddingTop: "10px",
+              borderRadius: "40px",
+              marginInline: "20px",
+            }}
+          >
+            <img
+              src="/sponsors/Logo UNIS3 (2).png"
+              style={{ height: "60px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/GIZ.jpeg"
+              style={{ height: "110px", objectFit: "contain" }}
+            />
+          </div>
+          <h5 style={{ color: "#bababa" }}>Apoyo</h5>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
+              paddingInline: "40px",
+              paddingTop: "10px",
+              borderRadius: "40px",
+              marginInline: "20px",
+            }}
+          >
+            <img
+              src="/sponsors/alianza por los jóvenes.jpeg"
+              style={{ height: "70px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/AMBEV.png"
+              style={{ height: "90px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/BI.png"
+              style={{ height: "70px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/industrias san miguel.jpeg"
+              style={{ height: "100px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/cayala.png"
+              style={{ height: "80px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/biorem.png"
+              style={{ height: "120px", objectFit: "contain" }}
+            />
+          </div>
+          {/* <a href="https://unis.edu.gt/">
             <img src="https://unis.edu.gt/wp-content/uploads/2021/08/logo.svg" />
-          </a>
+          </a> */}
         </div>
       </Stack>
     </ErrorBoundary>

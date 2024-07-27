@@ -1,13 +1,12 @@
-import tedxLogoImg from "/tedxfullwhite.svg";
-
 import { ImgHTMLAttributes } from "react";
+import integrarseLogoImg from "/integrarse-white.svg";
 
-export default function TEDxLogo({
+export default function IntegraRSELogo({
   ...restProps
 }: ImgHTMLAttributes<HTMLImageElement>) {
   return (
     <img
-      src={tedxLogoImg}
+      src={integrarseLogoImg}
       style={{ width: "9rem", objectFit: "contain" }}
       {...restProps}
     />

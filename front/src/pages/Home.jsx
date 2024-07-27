@@ -54,11 +54,15 @@ export default function Home() {
     <div>
       <Row>
         <Col xs={12} sm={8}>
-          <img src="/tedxbanner.svg" />
+          <img src="/integrarse-black.svg" className="w-100" />
+          <h4>
+            Estrategias integrales y sostenibles para la Responsabilidad Social
+            Empresarial
+          </h4>
         </Col>
         <Col xs={12} sm={4}>
           {mainInfo !== null ? (
-            <div className="d-flex align-items-center justify-content-center flex-column h-100">
+            <div className="d-flex align-items-center justify-content-center text-center flex-column h-100">
               {Date.now() <=
               new Date(
                 mainInfo.starting_datetime + mainInfo.timezone
@@ -78,11 +82,11 @@ export default function Home() {
           ) : null}
         </Col>
       </Row>
-      <h1 className="text-center mt-3">Bloques</h1>
+      <h1 className="text-center mt-3">Actividades</h1>
       <Stack gap={3}>
         <Row className="gy-4">
           {eventBlocks.map((eb, i) => (
-            <Col key={i} md={6} lg={4}>
+            <Col key={i} md={6} lg={6}>
               <EventBlock
                 page="home"
                 data={eb}

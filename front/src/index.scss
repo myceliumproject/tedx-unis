@@ -1,11 +1,17 @@
-$primary: #7B001E;
+$primary: #1a6c46; //#069f1f; //#12da32;
 $secondary: #CC9865;
 $warning: #0077B5;
 $light: #833AB4;
+$info: #bbbbbb;
 $border-radius: 0;
 $font-family-sans-serif: 'Montserrat', sans-serif;
 $headings-font-weight: 700;
-$headings-color: #AE0036;
+$headings-color: #006400;
+
+// #7B001E unis
+// #1a6c46 verde oscuro
+// #069f1f verde medio
+// #12da32 verde claro
 
 @import "bootstrap/scss/bootstrap";
 

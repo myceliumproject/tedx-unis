@@ -30,7 +30,7 @@ export default function Creditos() {
             name="Diego David Vallejo Juarez"
             linkedin="https://www.linkedin.com/in/diego-vallejo-ab55a3294/"
             instagram="https://instagram.com/diego_vj_"
-            song="https://open.spotify.com/embed/track/1DTRrxBn0L0Mqe5j26ZA6h?utm_source=generator"
+            song="https://open.spotify.com/embed/track/0ZucyPms79Cydv0RMYV2Oi?utm_source=generator"
           />
         </Col>
       </Row>
