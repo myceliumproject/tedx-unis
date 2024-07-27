@@ -58,10 +58,21 @@ export default function MainLayout() {
           className="bg-dark  text-white pt-3 d-flex flex-column align-items-center gap-3 flex-grow-1"
           style={{ paddingBottom: "60px" }}
         >
-          <div style={{ display: "flex", marginTop: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              marginTop: "20px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
             <img
               src="/mycelium.svg"
-              style={{ height: "150px", objectFit: "conatain" }}
+              style={{
+                height: "150px",
+                objectFit: "conatain",
+                marginBottom: "20px",
+              }}
             />
             <div
               style={{
@@ -93,7 +104,7 @@ export default function MainLayout() {
               justifyContent: "center",
               backgroundColor: "white",
               paddingInline: "40px",
-              paddingTop: "10px",
+              paddingTop: "20px",
               borderRadius: "40px",
               marginInline: "20px",
             }}
@@ -104,7 +115,22 @@ export default function MainLayout() {
             />
             &nbsp;
             <img
-              src="/sponsors/GIZ.jpeg"
+              src="/sponsors/GIZ1.jpeg"
+              style={{ height: "110px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/GIZ2.jpeg"
+              style={{ height: "110px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/GIZ3.jpeg"
+              style={{ height: "110px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/GIZ4.jpeg"
               style={{ height: "110px", objectFit: "contain" }}
             />
           </div>
@@ -117,7 +143,7 @@ export default function MainLayout() {
               alignItems: "center",
               backgroundColor: "white",
               paddingInline: "40px",
-              paddingTop: "10px",
+              paddingTop: "20px",
               borderRadius: "40px",
               marginInline: "20px",
             }}
@@ -152,9 +178,6 @@ export default function MainLayout() {
               style={{ height: "120px", objectFit: "contain" }}
             />
           </div>
-          {/* <a href="https://unis.edu.gt/">
-            <img src="https://unis.edu.gt/wp-content/uploads/2021/08/logo.svg" />
-          </a> */}
         </div>
       </Stack>
     </ErrorBoundary>
