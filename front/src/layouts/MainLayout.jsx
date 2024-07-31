@@ -13,10 +13,7 @@ export default function MainLayout() {
         <Navbar expand="lg" bg="primary" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/">
-              {/* <IntegraRSELogo /> */}
-              <span style={{ fontWeight: "600", fontSize: "24px" }}>
-                Conecta<span style={{ color: "#7B001E" }}>RSE</span>
-              </span>
+              <IntegraRSELogo />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

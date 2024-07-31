@@ -85,12 +85,12 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
 
     sendEmail(
       email,
-      "Reportes de Asistencia IntegraRSE",
+      "Reportes de Asistencia ConectaRSE",
       `
         <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
         <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/>
           <h3 style="color: #006400">
-            Reporte de Asistencia IntegraRSE
+            Reporte de Asistencia ConectaRSE
           </h3>
         </div>
         `,
@@ -143,12 +143,12 @@ router.get("/cert/:block", authenticated("admin"), async (req, res) => {
 
       await sendEmail(
         userData.email,
-        "Certificado de Asistencia Foro IntegraRSE",
+        "Certificado de Asistencia Foro ConectaRSE",
         `
           <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
           <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/>
             <h3 style="color: #006400">
-              Certificado de Asistencia IntegraRSE: Estrategias integrales y sostenibles para la Responsabilidad Empresarial
+              Certificado de Asistencia ConectaRSE: Estrategias integrales y sostenibles para la Responsabilidad Empresarial
             </h3>
           </div>
           `,

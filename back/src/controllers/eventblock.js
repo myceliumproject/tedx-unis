@@ -248,7 +248,7 @@ router.patch(
 
     let mailSpecs = emailSpecs(
       req.user.email,
-      "Ticket de Ingreso IntegraRSE",
+      "Ticket de Ingreso ConectaRSE",
       `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${
         process.env.PUBLIC_SITE_URL
       }/integrarse-black.png"/><h1 style="color: #006400">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
