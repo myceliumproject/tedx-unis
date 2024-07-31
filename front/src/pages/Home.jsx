@@ -5,6 +5,7 @@ import { timeTo } from "$/lib/utils";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
+import "./Home.css"
 
 export default function Home() {
   const [eventBlocks, setEventBlocks] = useState([]);
@@ -54,7 +55,12 @@ export default function Home() {
     <div>
       <Row>
         <Col xs={12} sm={8}>
-          <img src="/integrarse-black.svg" className="w-100" />
+          {/* <img src="/integrarse-black.svg" className="w-100" /> */}
+          <h1
+            className="conectarse"
+          >
+            Conecta<span style={{ color: "#7B001E" }}>RSE</span>
+          </h1>
           <h4>
             Estrategias integrales y sostenibles para la Responsabilidad Social
             Empresarial

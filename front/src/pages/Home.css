@@ -1,0 +1,28 @@
+.conectarse {
+    font-family: Montserrat, system-ui;
+    font-size: 86px;
+}
+
+@media (max-width: 1200px) {
+    .conectarse {
+      font-size: 72px;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .conectarse {
+      font-size: 60px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .conectarse {
+      font-size: 56px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .conectarse {
+      font-size: 48px;
+    }
+  }

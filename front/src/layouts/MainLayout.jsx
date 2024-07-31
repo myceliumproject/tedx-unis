@@ -13,13 +13,16 @@ export default function MainLayout() {
         <Navbar expand="lg" bg="primary" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/">
-              <IntegraRSELogo />
+              {/* <IntegraRSELogo /> */}
+              <span style={{ fontWeight: "600", fontSize: "24px" }}>
+                Conecta<span style={{ color: "#7B001E" }}>RSE</span>
+              </span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/">
-                  Bloques
+                  Actividades
                 </Nav.Link>
                 {user !== null ? (
                   <Nav.Link as={Link} to="/changename">
@@ -115,6 +118,11 @@ export default function MainLayout() {
             />
             &nbsp;
             <img
+              src="/sponsors/industrias san miguel.jpeg"
+              style={{ height: "100px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
               src="/sponsors/GIZ1.jpeg"
               style={{ height: "110px", objectFit: "contain" }}
             />
@@ -146,6 +154,7 @@ export default function MainLayout() {
               backgroundColor: "white",
               paddingInline: "40px",
               paddingTop: "20px",
+              paddingBottom: "20px",
               borderRadius: "40px",
               marginInline: "20px",
             }}
@@ -166,18 +175,80 @@ export default function MainLayout() {
             />
             &nbsp;
             <img
-              src="/sponsors/industrias san miguel.jpeg"
-              style={{ height: "100px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/cayala.png"
+              src="https://cdn.prod.website-files.com/615f5753a32dcc1e9220daf6/617c02076c73e8e183778da7_LOGO%20DE%20CIUDAD%20CAYALA-01.png"
               style={{ height: "80px", objectFit: "contain" }}
             />
             &nbsp;
             <img
               src="/sponsors/biorem.png"
               style={{ height: "120px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="https://cig.industriaguate.com/wp-content/uploads/2024/01/Dinamic.png"
+              style={{ height: "80px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="https://media.licdn.com/dms/image/D4E0BAQEThtXGj1QKjQ/company-logo_200_200/0/1696609506901/zigiapp_logo?e=2147483647&v=beta&t=yrOoxYy8Y3HSUhK0H_7qSXwCtal4i8WY5r6vkjOCBCg"
+              style={{
+                height: "70px",
+                objectFit: "contain",
+                paddingLeft: "20px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="https://cig.industriaguate.com/wp-content/uploads/2024/04/CIG_Joven-1024x427.jpg"
+              style={{
+                height: "80px",
+                objectFit: "contain",
+                paddingTop: "5px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="https://guatemala.ureport.in/sitestatic/img/logos/UREPORT/U-Report_Logo_EN.png"
+              style={{ height: "70px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Bac_credomatic_logo.png"
+              style={{
+                height: "60px",
+                objectFit: "contain",
+                paddingTop: "10px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="https://flavorite.io/wp-content/themes/flavorite/img/logo.png"
+              style={{
+                height: "60px",
+                objectFit: "contain",
+                paddingLeft: "20px",
+                paddingTop: "10px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="https://cig.industriaguate.com/wp-content/uploads/2021/09/logo-cig.png"
+              style={{
+                height: "60px",
+                objectFit: "contain",
+                paddingLeft: "10px",
+                paddingTop: "10px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="https://grupovical.com/wp-content/uploads/2018/11/vical-logo-03.png"
+              style={{
+                height: "40px",
+                objectFit: "contain",
+                paddingLeft: "10px",
+                paddingTop: "10px",
+              }}
             />
           </div>
         </div>
