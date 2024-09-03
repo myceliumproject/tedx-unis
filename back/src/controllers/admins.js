@@ -113,13 +113,15 @@ router.get("/cert/:block", authenticated("admin"), async (req, res) => {
     let filtered = db_block.takenSeatAssignments.filter((e) => e.attended);
 
     const tempate = fs.readFileSync("./Document1.docx", "binary");
-    const zip = new PizZip(tempate);
-    const doc = new Docxtemplater(zip, {
-      linebreaks: true,
-    });
 
     for (const u of filtered) {
       const userData = (await db.collection("user").doc(u.userId).get()).data();
+
+      const zip = new PizZip(tempate);
+      const doc = new Docxtemplater(zip, {
+        linebreaks: true,
+      });
+
       doc.render({
         username: userData.name,
       });
@@ -135,11 +137,13 @@ router.get("/cert/:block", authenticated("admin"), async (req, res) => {
 
       await new Promise((resolve, reject) =>
         unoconv.convert(docx_result, "pdf", {}, function (err, res) {
-          if (err) reject(err);
+          if (err) return reject(err);
           fs.writeFileSync(pdf_result, res);
           resolve();
         })
       );
+
+      console.log("Certificado enviado a:", userData);
 
       await sendEmail(
         userData.email,
@@ -154,9 +158,9 @@ router.get("/cert/:block", authenticated("admin"), async (req, res) => {
           `,
         [
           {
-            filename: pdf_result,
+            filename: "Certificado_de_asistencia.pdf",
             path: pdf_result,
-            contentType: "applicaation/pdf",
+            contentType: "application/pdf",
           },
         ]
       );
