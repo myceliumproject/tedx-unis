@@ -83,6 +83,7 @@ router.post("/", async (req, res) => {
       name: "",
       description: "",
       date: "",
+      order: 1000000,
       initial_time: "",
       final_time: "",
       img: "", // URL
@@ -107,6 +108,7 @@ router.post("/", async (req, res) => {
         },
       ],
       takenSeats: [],
+      blockedSeats: [],
       takenSeatAssignments: [],
       waitlist: [],
     };
@@ -122,7 +124,10 @@ router.post("/", async (req, res) => {
 /** GET ALL EVENT BLOCKS **/
 router.get("/list", async (req, res) => {
   try {
-    const eventBlocksSnapshot = await db.collection("event_blocks").get();
+    const eventBlocksSnapshot = await db
+      .collection("event_blocks")
+      .orderBy("order")
+      .get();
     const eventBlocks = [];
 
     eventBlocksSnapshot.forEach((doc) => {
