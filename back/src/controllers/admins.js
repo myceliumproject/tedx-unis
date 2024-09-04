@@ -88,7 +88,7 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
       "Reportes de Asistencia ConectaRSE",
       `
         <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
-        <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/>
+        <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/minds-black.png"/>
           <h3 style="color: #006400">
             Reporte de Asistencia ConectaRSE
           </h3>
@@ -150,7 +150,7 @@ router.get("/cert/:block", authenticated("admin"), async (req, res) => {
         "Certificado de Asistencia Foro ConectaRSE",
         `
           <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
-          <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/>
+          <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/minds-black.png"/>
             <h3 style="color: #006400">
               Certificado de Asistencia ConectaRSE: Estrategias integrales y sostenibles para la Responsabilidad Empresarial
             </h3>

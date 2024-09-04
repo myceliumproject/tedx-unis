@@ -27,7 +27,7 @@ router.post("/authrequest", (req, res) => {
   let mailSpecs = emailSpecs(
     req.body.email,
     "Código de Verificación",
-    `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/integrarse-black.png"/><p>Se ha hecho un intento de autenticación para su correo. Su código de verificación es:</p><p style="font-size: 2rem; font-weight: bold">${emailCodes[email].code}</p><p>Si usted no realizó este intento, puede ignorar este correo</p><p style="font-size: 0.8rem; color: gray">Powered by: Mycelium <img style="width: 1rem" src="${process.env.PUBLIC_SITE_URL}/mycelium.png"/></p></div>`
+    `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/minds-black.png"/><p>Se ha hecho un intento de autenticación para su correo. Su código de verificación es:</p><p style="font-size: 2rem; font-weight: bold">${emailCodes[email].code}</p><p>Si usted no realizó este intento, puede ignorar este correo</p><p style="font-size: 0.8rem; color: gray">Powered by: Mycelium <img style="width: 1rem" src="${process.env.PUBLIC_SITE_URL}/mycelium.png"/></p></div>`
   );
 
   transporter.sendMail(mailSpecs, (error, info) => {
