@@ -52,9 +52,13 @@ export default function ListaBloques() {
   };
 
   const handleChangeEvents = (index, campo, valor) => {
-    let temp = { ...currentEdit };
-    temp.events[index][campo] = valor;
-    setCurrentEdit(temp);
+    const tempEvent = { ...currentEdit.events[index] };
+    tempEvent[campo] = valor;
+    const tempEvents = [...currentEdit.events];
+    tempEvents[index] = tempEvent;
+    let tempEdit = { ...currentEdit };
+    tempEdit.events = tempEvents;
+    setCurrentEdit(tempEdit);
   };
 
   const submitChange = () => {

@@ -49,7 +49,7 @@ export default function EventBlock({
         ) : null}
         <Card.Body>
           <Card.Title>{data?.name}</Card.Title>
-          <Card.Subtitle>
+          <Card.Subtitle className="text-primary">
             {new Date(
               data?.date + "T" + data?.initial_time
             ).toLocaleDateString()}{" "}
@@ -62,11 +62,7 @@ export default function EventBlock({
           </Card.Subtitle>
           {data?.description !== "" ? <p>{data?.description}</p> : null}
         </Card.Body>
-        <Accordion
-          alwaysOpen
-          flush
-          className="border-top border-bottom border-tertiary"
-        >
+        <Accordion alwaysOpen flush className="border-top border-bottom">
           {data?.events.map((ev, i) => (
             <Accordion.Item eventKey={i.toString()} key={i}>
               <Accordion.Header>
@@ -92,7 +88,11 @@ export default function EventBlock({
               seat === null &&
               data?.blockedSeats?.length + data?.takenSeats?.length >=
                 232 ? null : (
-                <Link to={`/block/${data?.id}`} className="btn btn-primary">
+                <Link
+                  to={`/block/${data?.id}`}
+                  className="btn btn-primary text-white"
+                  style={{ fontWeight: "700" }}
+                >
                   {seat !== null ? "Ver ticket" : "Conseguir asiento"}
                 </Link>
               )

@@ -70,7 +70,7 @@ function Seat({
           stroke="black"
           fill={
             color === "gold"
-              ? "#CC9865"
+              ? "#9e0031"
               : color === "gray"
               ? "gray"
               : color === "black"
@@ -78,7 +78,7 @@ function Seat({
               : color === "darkgray"
               ? "#3f3f3f"
               : color === "blue"
-              ? "skyblue"
+              ? "#faa825"
               : "white"
           }
         />

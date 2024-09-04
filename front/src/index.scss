@@ -1,12 +1,19 @@
-$primary: #1a6c46; //#069f1f; //#12da32;
-$secondary: #CC9865;
+$primary: #faa825; //#069f1f; //#12da32;
+$secondary: #9e0031;
 $warning: #0077B5;
-$light: #833AB4;
+$light: #ffffff;
 $info: #bbbbbb;
 $border-radius: 0;
 $font-family-sans-serif: 'Montserrat', sans-serif;
 $headings-font-weight: 700;
-$headings-color: #006400;
+$body-bg: #111314;
+$body-color: $light;
+$accordion-button-active-bg: #212529;
+$accordion-button-active-color: white;
+$accordion-border-color: white;
+$tooltip-color: $light;
+$table-color: $light;
+// $headings-color: #006400;
 
 // #7B001E unis
 // #1a6c46 verde oscuro
@@ -29,4 +36,15 @@ html, body, #root {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+}
+
+.navText {
+    color:white;
+    font-size: 20px;
+    font-weight: bold
+}
+
+.navText:hover {
+    color: #faa825;
+    text-decoration: underline;
 }

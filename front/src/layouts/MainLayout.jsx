@@ -1,4 +1,3 @@
-import IntegraRSELogo from "$/lib/components/IntegraRSELogo";
 import { useUser } from "$/lib/hooks/user";
 import ErrorBoundary from "$/routes/ErrorBoundary";
 import { Badge, Container, Nav, Navbar, Stack } from "react-bootstrap";
@@ -9,29 +8,32 @@ export default function MainLayout() {
 
   return (
     <ErrorBoundary>
-      <Stack style={{ minHeight: "100vh" }}>
-        <Navbar expand="lg" bg="primary" variant="dark">
+      <Stack
+        style={{ minHeight: "100vh", backgroundColor: "#111314" }}
+        // className="bg-dark"
+      >
+        <Navbar expand="lg" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/">
-              <IntegraRSELogo />
+              MINDS VOL 2 LOGO
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link as={Link} to="/">
+                <Nav.Link as={Link} to="/" className="navText">
                   Actividades
                 </Nav.Link>
                 {user !== null ? (
-                  <Nav.Link as={Link} to="/changename">
+                  <Nav.Link as={Link} to="/changename" className="navText">
                     Cambiar nombre
                   </Nav.Link>
                 ) : null}
                 {user === null ? (
-                  <Nav.Link as={Link} to="/auth">
+                  <Nav.Link as={Link} to="/auth" className="navText">
                     Inicio de sesión
                   </Nav.Link>
                 ) : user.userType === "staff" || user.userType === "admin" ? (
-                  <Nav.Link as={Link} to="/staff">
+                  <Nav.Link as={Link} to="/staff" className="navText">
                     Staff
                   </Nav.Link>
                 ) : null}
@@ -41,6 +43,7 @@ export default function MainLayout() {
                       localStorage.clear();
                       setTimeout(() => (window.location.href = "/"), 100);
                     }}
+                    className="navText"
                   >
                     Cerrar sesión
                   </Nav.Link>
@@ -104,148 +107,37 @@ export default function MainLayout() {
               justifyContent: "center",
               backgroundColor: "white",
               paddingInline: "40px",
-              paddingTop: "20px",
               borderRadius: "40px",
               marginInline: "20px",
             }}
           >
             <img
-              src="/sponsors/Logo UNIS3 (2).png"
-              style={{ height: "60px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/industrias san miguel.jpeg"
-              style={{ height: "100px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/GIZ1.jpeg"
-              style={{ height: "110px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/GIZ2.jpeg"
-              style={{ height: "110px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/GIZ3.jpeg"
-              style={{ height: "110px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/GIZ4.jpeg"
-              style={{ height: "110px", objectFit: "contain" }}
-            />
-          </div>
-          <h5 style={{ color: "#bababa", marginTop: "20px" }}>
-            Con el apoyo de
-          </h5>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "white",
-              paddingInline: "40px",
-              paddingTop: "20px",
-              paddingBottom: "20px",
-              borderRadius: "40px",
-              marginInline: "20px",
-            }}
-          >
-            <img
-              src="/sponsors/alianza por los jóvenes.jpeg"
-              style={{ height: "70px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/AMBEV.png"
+              src="/sponsors/fie.png"
               style={{ height: "90px", objectFit: "contain" }}
             />
             &nbsp;
             <img
-              src="/sponsors/BI.png"
-              style={{ height: "70px", objectFit: "contain" }}
+              src="/sponsors/gyt.png"
+              style={{ height: "110px", objectFit: "contain" }}
             />
             &nbsp;
             <img
-              src="https://cdn.prod.website-files.com/615f5753a32dcc1e9220daf6/617c02076c73e8e183778da7_LOGO%20DE%20CIUDAD%20CAYALA-01.png"
-              style={{ height: "80px", objectFit: "contain" }}
+              src="/sponsors/osmo.png"
+              style={{ height: "50px", objectFit: "contain" }}
             />
             &nbsp;
             <img
-              src="/sponsors/biorem.png"
-              style={{ height: "120px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="https://cig.industriaguate.com/wp-content/uploads/2024/01/Dinamic.png"
-              style={{ height: "80px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="https://media.licdn.com/dms/image/D4E0BAQEThtXGj1QKjQ/company-logo_200_200/0/1696609506901/zigiapp_logo?e=2147483647&v=beta&t=yrOoxYy8Y3HSUhK0H_7qSXwCtal4i8WY5r6vkjOCBCg"
-              style={{
-                height: "70px",
-                objectFit: "contain",
-                paddingLeft: "20px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="https://cig.industriaguate.com/wp-content/uploads/2024/04/CIG_Joven-1024x427.jpg"
+              src="/sponsors/Redbull NEGRO.png"
               style={{
                 height: "80px",
                 objectFit: "contain",
-                paddingTop: "5px",
+                marginLeft: "30px",
               }}
             />
             &nbsp;
             <img
-              src="https://guatemala.ureport.in/sitestatic/img/logos/UREPORT/U-Report_Logo_EN.png"
-              style={{ height: "70px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Bac_credomatic_logo.png"
-              style={{
-                height: "60px",
-                objectFit: "contain",
-                paddingTop: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="https://flavorite.io/wp-content/themes/flavorite/img/logo.png"
-              style={{
-                height: "60px",
-                objectFit: "contain",
-                paddingLeft: "20px",
-                paddingTop: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="https://cig.industriaguate.com/wp-content/uploads/2021/09/logo-cig.png"
-              style={{
-                height: "60px",
-                objectFit: "contain",
-                paddingLeft: "10px",
-                paddingTop: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="https://grupovical.com/wp-content/uploads/2018/11/vical-logo-03.png"
-              style={{
-                height: "40px",
-                objectFit: "contain",
-                paddingLeft: "10px",
-                paddingTop: "10px",
-              }}
+              src="/sponsors/ZIGI.png"
+              style={{ height: "90px", objectFit: "contain" }}
             />
           </div>
         </div>

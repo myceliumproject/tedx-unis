@@ -55,10 +55,10 @@ export default function Home() {
     <div>
       <Row>
         <Col xs={12} sm={8}>
-          <img src="/integrarse-black.svg" className="w-100" />
+          <h1>MINDS VOL 2 LOGO</h1>
           <h4>
-            Estrategias integrales y sostenibles para la Responsabilidad Social
-            Empresarial
+            Una semana de conferencias extraordinarias para todos aquellos que
+            quieren expandir sus conocimientos
           </h4>
         </Col>
         <Col xs={12} sm={4}>

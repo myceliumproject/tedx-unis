@@ -122,6 +122,8 @@ export default function BlockInfo() {
                           : setSeatConfirmationDialog(true)
                       }
                       disabled={selectedSeat === null}
+                      className="text-white"
+                      style={{ fontWeight: "700" }}
                     >
                       Confirmar
                     </Button>
