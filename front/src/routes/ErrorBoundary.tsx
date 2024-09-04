@@ -23,11 +23,7 @@ export default class ErrorBoundary extends React.Component<
       return (
         <Container className="d-flex justify-content-center align-items-center justify-content-center">
           <Card className="p-5">
-            <img
-              src="/integrarse-black.svg"
-              className="mb-4 mt-2 w-100"
-              alt=""
-            />
+            <img src="/minds-white.svg" className="mb-4 mt-2 w-100" alt="" />
             <h2>Error mostrando página</h2>
             <Button onClick={() => window.location.reload()}>Recargar</Button>
           </Card>

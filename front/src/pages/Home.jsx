@@ -55,7 +55,7 @@ export default function Home() {
     <div>
       <Row>
         <Col xs={12} sm={8}>
-          <h1>MINDS VOL 2 LOGO</h1>
+          <img src="/minds-white.svg" className="w-100" />
           <h4>
             Una semana de conferencias extraordinarias para todos aquellos que
             quieren expandir sus conocimientos

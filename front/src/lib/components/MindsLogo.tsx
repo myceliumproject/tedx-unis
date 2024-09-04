@@ -1,12 +1,12 @@
 import { ImgHTMLAttributes } from "react";
-import integrarseLogoImg from "/integrarse-white.svg";
+import mindsLogoImg from "/minds-white.svg";
 
-export default function IntegraRSELogo({
+export default function MindsLogo({
   ...restProps
 }: ImgHTMLAttributes<HTMLImageElement>) {
   return (
     <img
-      src={integrarseLogoImg}
+      src={mindsLogoImg}
       style={{ width: "9rem", objectFit: "contain" }}
       {...restProps}
     />

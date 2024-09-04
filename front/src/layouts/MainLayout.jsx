@@ -1,3 +1,4 @@
+import MindsLogo from "$/lib/components/MindsLogo";
 import { useUser } from "$/lib/hooks/user";
 import ErrorBoundary from "$/routes/ErrorBoundary";
 import { Badge, Container, Nav, Navbar, Stack } from "react-bootstrap";
@@ -15,7 +16,7 @@ export default function MainLayout() {
         <Navbar expand="lg" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/">
-              MINDS VOL 2 LOGO
+              <MindsLogo />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
