@@ -85,12 +85,12 @@ router.get("/report/:email", authenticated("admin"), async (req, res) => {
 
     sendEmail(
       email,
-      "Reportes de Asistencia ConectaRSE",
+      "Reportes de Asistencia Minds",
       `
         <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
         <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/minds-black.png"/>
-          <h3 style="color: #006400">
-            Reporte de Asistencia ConectaRSE
+          <h3>
+            Reporte de Asistencia Minds
           </h3>
         </div>
         `,
@@ -147,12 +147,12 @@ router.get("/cert/:block", authenticated("admin"), async (req, res) => {
 
       await sendEmail(
         userData.email,
-        "Certificado de Asistencia Foro ConectaRSE",
+        "Certificado de Asistencia Minds",
         `
           <div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;">
           <img style="width: 30rem" src="${process.env.PUBLIC_SITE_URL}/minds-black.png"/>
-            <h3 style="color: #006400">
-              Certificado de Asistencia ConectaRSE: Estrategias integrales y sostenibles para la Responsabilidad Empresarial
+            <h3>
+              Certificado de Asistencia Minds
             </h3>
           </div>
           `,

@@ -253,10 +253,10 @@ router.patch(
 
     let mailSpecs = emailSpecs(
       req.user.email,
-      "Ticket de Ingreso ConectaRSE",
+      "Ticket de Ingreso Minds",
       `<div style="font-family: sans-serif; max-width: 60rem; margin: auto; text-align: center;"><img style="width: 30rem" src="${
         process.env.PUBLIC_SITE_URL
-      }/minds-black.png"/><h1 style="color: #006400">Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
+      }/minds-black.png"/><h1>Bienvenido a la experiencia</h1><p>Este es tu QR de ingreso para el bloque del ${format(
         blockDate,
         "dd/MM/yyyy, hh:mm aa",
         { locale: es }
