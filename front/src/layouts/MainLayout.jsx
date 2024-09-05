@@ -110,6 +110,7 @@ export default function MainLayout() {
               paddingInline: "40px",
               borderRadius: "40px",
               marginInline: "20px",
+              maxWidth: "1100px",
             }}
           >
             <img
@@ -124,7 +125,7 @@ export default function MainLayout() {
             &nbsp;
             <img
               src="/sponsors/osmo.png"
-              style={{ height: "50px", objectFit: "contain" }}
+              style={{ height: "190px", objectFit: "contain" }}
             />
             &nbsp;
             <img
@@ -139,6 +140,35 @@ export default function MainLayout() {
             <img
               src="/sponsors/ZIGI.png"
               style={{ height: "90px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/fabbro.jpeg"
+              style={{ height: "70px", objectFit: "contain" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/pepsico.svg"
+              style={{ height: "70px", objectFit: "contain", padding: "10px" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/progreso.jpeg"
+              style={{ height: "80px", objectFit: "contain", padding: "10px" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/starbucks.PNG"
+              style={{ height: "90px", objectFit: "contain", padding: "10px" }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/ultra.png"
+              style={{
+                height: "100px",
+                objectFit: "contain",
+                padding: "10px",
+              }}
             />
           </div>
         </div>
