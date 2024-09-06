@@ -170,6 +170,52 @@ export default function MainLayout() {
                 padding: "10px",
               }}
             />
+            &nbsp;
+            <img
+              src="/sponsors/once.png"
+              style={{
+                height: "130px",
+                objectFit: "contain",
+                padding: "10px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/gabriel.png"
+              style={{
+                height: "80px",
+                objectFit: "contain",
+                padding: "10px",
+                filter: "grayscale(100%)",
+              }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/nene.png"
+              style={{
+                height: "70px",
+                objectFit: "contain",
+                padding: "10px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/helios.png"
+              style={{
+                height: "100px",
+                objectFit: "contain",
+                padding: "10px",
+              }}
+            />
+            &nbsp;
+            <img
+              src="/sponsors/crunchy.png"
+              style={{
+                height: "80px",
+                objectFit: "contain",
+                padding: "10px",
+              }}
+            />
           </div>
         </div>
       </Stack>
