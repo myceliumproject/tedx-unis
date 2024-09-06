@@ -172,6 +172,11 @@ export default function MainLayout() {
             />
             &nbsp;
             <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_re78TF2Antd0WYx6SA0ieL1fG5ZsUS6jOw&s"
+              style={{ height: "80px", objectFit: "contain", padding: "10px" }}
+            />
+            &nbsp;
+            <img
               src="/sponsors/once.png"
               style={{
                 height: "130px",
