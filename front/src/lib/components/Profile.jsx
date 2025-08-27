@@ -5,14 +5,19 @@ export default function Profile({ image, name, linkedin, instagram, song }) {
   return (
     <>
       <Card className="profile-card">
-        <Card.Img variant="top" src={image} className="rounded-circle" />
         <Card.Body>
-          <Card.Title>{name}</Card.Title>
+          <Card.Img
+            variant="top"
+            src={image}
+            className="rounded-circle shadow"
+          />
+          <Card.Title className="mt-4">{name}</Card.Title>
           <div>
             <Button
               variant="warning"
               className="d-flex gap-1 justify-content-center align-items-center"
               href={linkedin}
+              target="_blank"
             >
               <AiOutlineLinkedin />
               LinkedIn
@@ -23,6 +28,7 @@ export default function Profile({ image, name, linkedin, instagram, song }) {
               variant="light"
               className="d-flex gap-1 justify-content-center align-items-center"
               href={instagram}
+              target="_blank"
             >
               <AiOutlineInstagram />
               Instagram

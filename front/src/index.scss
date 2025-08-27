@@ -1,26 +1,29 @@
-$primary: #7B001E;
-$secondary: #CC9865;
-$warning: #0077B5;
-$light: #833AB4;
+$primary: #7b001e;
+$secondary: #cc9865;
+$warning: #0077b5;
+$light: #833ab4;
 $border-radius: 0;
-$font-family-sans-serif: 'Montserrat', sans-serif;
+$font-family-sans-serif: "Montserrat", sans-serif;
 $headings-font-weight: 700;
-$headings-color: #AE0036;
+$headings-color: #ae0036;
 
 @import "bootstrap/scss/bootstrap";
 
 .profile-card {
-    margin-bottom: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px;
-    transition: box-shadow 0.1s linear;
+  margin-bottom: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 5px;
+  transition: box-shadow 0.1s linear;
+  border-radius: 12px;
 }
 
 .profile-card:hover {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 }
 
-html, body, #root {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }

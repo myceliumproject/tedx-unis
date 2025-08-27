@@ -61,7 +61,7 @@ export default function MainLayout() {
             <Outlet />
           </ErrorBoundary>
         </Container>
-        <div
+        {/* <div
           className="bg-dark text-white pt-3 d-flex flex-column align-items-center gap-3 flex-grow-1"
           style={{ paddingBottom: "10rem" }}
         >
@@ -69,7 +69,7 @@ export default function MainLayout() {
           <a href="https://unis.edu.gt/">
             <img src="https://unis.edu.gt/wp-content/uploads/2021/08/logo.svg" />
           </a>
-        </div>
+        </div> */}
       </Stack>
     </ErrorBoundary>
   );
