@@ -10,7 +10,11 @@ export default function MainLayout() {
   return (
     <ErrorBoundary>
       <Stack
-        style={{ minHeight: "100vh", backgroundColor: "#111314" }}
+        style={{ 
+          minHeight: "100vh", 
+          // backgroundColor: "#111314"
+          backgroundColor: "#000000" 
+        }}
         // className="bg-dark"
       >
         <Navbar expand="lg" variant="dark">
@@ -106,121 +110,35 @@ export default function MainLayout() {
               flexWrap: "wrap",
               alignItems: "center",
               justifyContent: "center",
+              gap: "12px",
               backgroundColor: "white",
               paddingInline: "40px",
+              paddingBlock: "16px",
               borderRadius: "40px",
               marginInline: "20px",
               maxWidth: "1100px",
             }}
           >
             <img
-              src="/sponsors/fie.png"
-              style={{ height: "90px", objectFit: "contain" }}
+              src="/sponsors/redbull.svg"
+              style={{ height: "60px", objectFit: "contain" }}
             />
             &nbsp;
             <img
-              src="/sponsors/gyt.png"
-              style={{ height: "110px", objectFit: "contain" }}
+              src="/sponsors/Logo UNIS3 (2).png"
+              style={{ height: "60px", objectFit: "contain" }}
             />
             &nbsp;
             <img
-              src="/sponsors/osmo.png"
-              style={{ height: "190px", objectFit: "contain" }}
+              src="/sponsors/subway.svg"
+              style={{ height: "60px", objectFit: "contain" }}
             />
             &nbsp;
             <img
-              src="/sponsors/Redbull NEGRO.png"
-              style={{
-                height: "80px",
-                objectFit: "contain",
-                marginLeft: "30px",
-              }}
+              src="/sponsors/taekwondo.svg"
+              style={{ height: "60px", objectFit: "contain" }}
             />
             &nbsp;
-            <img
-              src="/sponsors/ZIGI.png"
-              style={{ height: "90px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/fabbro.jpeg"
-              style={{ height: "70px", objectFit: "contain" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/pepsico.svg"
-              style={{ height: "70px", objectFit: "contain", padding: "10px" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/progreso.jpeg"
-              style={{ height: "80px", objectFit: "contain", padding: "10px" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/starbucks.PNG"
-              style={{ height: "90px", objectFit: "contain", padding: "10px" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/ultra.png"
-              style={{
-                height: "100px",
-                objectFit: "contain",
-                padding: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_re78TF2Antd0WYx6SA0ieL1fG5ZsUS6jOw&s"
-              style={{ height: "80px", objectFit: "contain", padding: "10px" }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/once.png"
-              style={{
-                height: "130px",
-                objectFit: "contain",
-                padding: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/gabriel.png"
-              style={{
-                height: "80px",
-                objectFit: "contain",
-                padding: "10px",
-                filter: "grayscale(100%)",
-              }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/nene.png"
-              style={{
-                height: "70px",
-                objectFit: "contain",
-                padding: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/helios.png"
-              style={{
-                height: "100px",
-                objectFit: "contain",
-                padding: "10px",
-              }}
-            />
-            &nbsp;
-            <img
-              src="/sponsors/crunchy.png"
-              style={{
-                height: "80px",
-                objectFit: "contain",
-                padding: "10px",
-              }}
-            />
           </div>
         </div>
       </Stack>

@@ -54,14 +54,14 @@ export default function Home() {
   return (
     <div>
       <Row>
-        <Col xs={12} sm={8}>
-          <img src="/minds-white.svg" className="w-100" />
-          <h4>
+        <Col xs={12} sm={12}>
+          <img src="/minds3.png" className="w-100" />
+          {/* <h4>
             Una semana de conferencias extraordinarias para todos aquellos que
             quieren expandir sus conocimientos
-          </h4>
+          </h4> */}
         </Col>
-        <Col xs={12} sm={4}>
+        <Col xs={12} sm={12}>
           {mainInfo !== null ? (
             <div className="d-flex align-items-center justify-content-center text-center flex-column h-100">
               {Date.now() <=
