@@ -10,13 +10,27 @@ export default function MainLayout() {
   return (
     <ErrorBoundary>
       <Stack
-        style={{ 
-          minHeight: "100vh", 
-          // backgroundColor: "#111314"
-          backgroundColor: "#000000" 
+        style={{
+          minHeight: "100vh",
+          backgroundColor: "#111314",
+          position: "relative",
         }}
         // className="bg-dark"
       >
+        <div
+          style={{
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            width: "90%",
+            height: "370px",
+            // background: "#111314",
+            background:
+              "linear-gradient(43deg,rgba(17, 19, 20, 1) 0%, rgba(17, 19, 20, 1) 50%, rgba(255, 255, 255, 1) 100%)",
+            opacity: "20%",
+            clipPath: "polygon(100% 0, 50% 25%, 50% 75%)",
+          }}
+        ></div>
         <Navbar expand="lg" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/">
@@ -57,7 +71,7 @@ export default function MainLayout() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <Container className="py-4">
+        <Container className="py-4" style={{ zIndex: 10 }}>
           <ErrorBoundary>
             <Outlet />
           </ErrorBoundary>

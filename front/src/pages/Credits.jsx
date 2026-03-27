@@ -1,6 +1,5 @@
 import Profile from "$/lib/components/Profile";
-import { Button, Card, Col, Row } from "react-bootstrap";
-import { AiOutlineInstagram, AiOutlineLinkedin } from "react-icons/ai";
+import { Col, Row } from "react-bootstrap";
 
 export default function Creditos() {
   return (
@@ -30,46 +29,9 @@ export default function Creditos() {
             name="Diego David Vallejo Juarez"
             linkedin="https://www.linkedin.com/in/diego-vallejo-ab55a3294/"
             instagram="https://instagram.com/diego_vj_"
-            song="https://open.spotify.com/embed/track/0ZucyPms79Cydv0RMYV2Oi?utm_source=generator"
+            song="https://open.spotify.com/embed/track/4rPl7ezxtoqshKnI1kk3dX?utm_source=generator"
           />
         </Col>
-      </Row>
-      <h3 className="text-center">Agradecimientos</h3>
-      <Row>
-        <Col></Col>
-        <Col md={6}>
-          <Card className="profile-card">
-            <Row>
-              <Col xs={5} lg={3}>
-                <Card.Img
-                  variant="top"
-                  src="/juanpa.webp"
-                  className="rounded-circle"
-                  style={{ width: "150px", height: "150px" }}
-                />
-              </Col>
-              <Col xs={7} lg={9}>
-                <Card.Body>
-                  <Card.Title>Juan Pablo Vallejo Juarez</Card.Title>
-                  <Button
-                    variant="warning"
-                    href={"https://www.linkedin.com/in/juanpavallejo"}
-                    className="mx-2"
-                  >
-                    <AiOutlineLinkedin />
-                  </Button>
-                  <Button
-                    variant="light"
-                    href={"https://instagram.com/juanpa_vallejo"}
-                  >
-                    <AiOutlineInstagram />
-                  </Button>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-        <Col></Col>
       </Row>
     </>
   );

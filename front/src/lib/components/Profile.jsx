@@ -13,6 +13,7 @@ export default function Profile({ image, name, linkedin, instagram, song }) {
               variant="warning"
               className="d-flex gap-1 justify-content-center align-items-center"
               href={linkedin}
+              target="_blank"
             >
               <AiOutlineLinkedin />
               LinkedIn
@@ -23,6 +24,7 @@ export default function Profile({ image, name, linkedin, instagram, song }) {
               variant="light"
               className="d-flex gap-1 justify-content-center align-items-center"
               href={instagram}
+              target="_blank"
             >
               <AiOutlineInstagram />
               Instagram
